@@ -8,6 +8,7 @@ import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 
 function App() {
+  console.log("Hello");
   return (
     <div className="app">
       <BrowserRouter>
