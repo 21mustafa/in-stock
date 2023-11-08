@@ -1,0 +1,16 @@
+@use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/fonts" as *;
+
+.footer {
+  background-color: #f7f8f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  @include desktop {
+    height: 3rem;
+  }
+  &__text {
+    color: #5c667e;
+  }
+}
