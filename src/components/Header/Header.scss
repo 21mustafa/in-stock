@@ -1,0 +1,43 @@
+@use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+    position: relative;
+    @include tablet {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        display: block;
+        padding-top: 3rem;
+        text-align: center;
+    }
+
+    &__links {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 3rem;
+    }
+
+    &__link {
+        @include h3;
+        color: $secondary-colors-2;
+        text-decoration: none;
+        padding: 0.7rem 2rem;
+        border-radius: 50rem;
+        flex: 1;
+        text-align: center;
+        margin: 0 1rem;
+        max-height: 4rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &--active {
+            background-color: $primary-colors-1;
+            color: $primary-colors-3;
+        }
+    }
+}

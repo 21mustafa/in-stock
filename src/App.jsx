@@ -8,7 +8,8 @@ import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import warehousesJSON from "./warehous.json";
 import { useState } from "react";
-// const baseURL = "http://localhost:5050";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [warehouseDetails, setWarehouseDetails] = useState(warehousesJSON);
@@ -24,19 +25,26 @@ function App() {
 
   return (
     <div className="app">
+      <div className="app__background" />
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<WarehouseList warehouseList={warehouseList} />}
-          />
-          <Route path="/details" element={<WarehouseDetails />} />
-          <Route path="/edit" element={<WarehouseEdit />} />
-          <Route path="/inventory/list" element={<InventoryList />} />
-          <Route path="/inventory/detail" element={<InventoryDetail />} />
-          <Route path="/inventory/edit" element={<InventoryEdit />} />
-        </Routes>
+        <div className="content">
+          <Header />
+          <main className="content__main">
+            <Routes>
+               <Route
+                  path="/"
+                  element={<WarehouseList warehouseList={warehouseList} />}
+              />
+              <Route path="/details" element={<WarehouseDetails />} />
+              <Route path="/edit" element={<WarehouseEdit />} />
+              <Route path="/inventory/list" element={<InventoryList />} />
+              <Route path="/inventory/detail" element={<InventoryDetail />} />
+              <Route path="/inventory/edit" element={<InventoryEdit />} />
+            </Routes>
+          </main>
+        </div>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }
