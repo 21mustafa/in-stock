@@ -14,7 +14,7 @@ import axios from "axios";
 
 function App() {
   const [warehouseDetails, setWarehouseDetails] = useState(warehousesJSON);
-  const [warehouseList, setWarehouseList] = useState(warehousesJSON);
+  const [warehouseList, setWarehouseList] = useState([]);
   const [inventoryList, setInventoryList] = useState([]);
 
   function selectWarehouse(id) {
@@ -27,11 +27,17 @@ function App() {
 
   useEffect(() => {
     void getInventoryList();
+    void getWarehouseList();
   }, []);
 
   const getInventoryList = async () => {
     const response = await axios.get("http://localhost:8080/inventories");
     setInventoryList(response.data);
+  };
+
+  const getWarehouseList = async () => {
+    const response = await axios.get("http://localhost:8080/warehouses");
+    setWarehouseList(response.data);
   };
 
   return (
@@ -54,9 +60,10 @@ function App() {
               />
               <Route
                 path="/inventory/detail/:id"
-                element={<InventoryDetail />}
+                element={<InventoryDetail inventoryList={inventoryList} />}
               />
               <Route path="/inventory/edit/:id" element={<InventoryEdit />} />
+              <Route path="/inventory/edit" element={<InventoryEdit />} />
             </Routes>
           </main>
         </div>
