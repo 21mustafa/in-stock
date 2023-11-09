@@ -62,7 +62,10 @@ function App() {
                 path="/inventory/detail/:id"
                 element={<InventoryDetail inventoryList={inventoryList} />}
               />
-              <Route path="/inventory/edit/:id" element={<InventoryEdit />} />
+              <Route
+                path="/inventory/edit/:id"
+                element={<InventoryEdit inventoryList={inventoryList} />}
+              />
               <Route path="/inventory/edit" element={<InventoryEdit />} />
             </Routes>
           </main>
