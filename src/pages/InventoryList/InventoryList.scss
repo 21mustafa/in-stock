@@ -1,1 +1,31 @@
 @use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
+.list {
+    &__table--large {
+        display: none;
+        @include tablet {
+            display: block;
+        }
+    }
+
+    &__table--small {
+        display: block;
+        @include tablet {
+            display: none;
+        }
+    }
+
+    &__search {
+        position: relative;
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        &-icon {
+            position: absolute;
+            right: 0;
+        }
+        &-input {
+            height: 3.6rem;
+        }
+    }
+}

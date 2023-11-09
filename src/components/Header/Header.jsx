@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./Header.scss";
 import logo from "../../assets/logo/InStock-Logo_1x.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header(props) {
-  const [active, setActive] = useState("warehouse");
+  const location = useLocation();
+  const [active, setActive] = useState(
+    location.pathname.includes("inventory") ? "inventory" : "warehouse"
+  );
   return (
     <header className="header">
       <Link
