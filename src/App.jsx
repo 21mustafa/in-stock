@@ -7,10 +7,12 @@ import InventoryList from "./pages/InventoryList/InventoryList";
 import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <div className="app">
+      <div className="app__background" />
       <BrowserRouter>
         <div className="content">
           <Header />
@@ -24,9 +26,9 @@ function App() {
               <Route path="/inventory/edit" element={<InventoryEdit />} />
             </Routes>
           </main>
-          {/* footer */}
         </div>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }

@@ -2,17 +2,10 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
-    background-color: $background-colors-1;
-    height: 23rem;
-
+    position: relative;
     @include tablet {
         display: flex;
         justify-content: space-between;
-        padding: 0 3rem;
-    }
-
-    @include desktop {
-        padding: 0 10rem;
     }
 
     &__logo {
