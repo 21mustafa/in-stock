@@ -1,5 +1,5 @@
-@use "../../styles/partials/mixin" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/mixin' as *;
+@use '../../styles/partials/variables' as *;
 
 .search {
   height: 36px;
@@ -85,13 +85,14 @@
   //   margin-left: 40px;
 }
 
-.flexbox2 {
-  //   padding-left: 40px;
-}
+// .flexbox2 {
+//     padding-left: 40px;
+// }
 // .icons {
 //   height: 24px;
 //   width: 24px;
 // }
+
 .icon-container {
   display: flex;
   justify-content: space-between;
