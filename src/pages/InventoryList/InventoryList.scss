@@ -1,1 +1,17 @@
 @use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
+.list {
+    &__table--large {
+        display: none;
+        @include tablet {
+            display: block;
+        }
+    }
+
+    &__table--small {
+        display: block;
+        @include tablet {
+            display: none;
+        }
+    }
+}
