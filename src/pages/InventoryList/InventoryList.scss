@@ -14,4 +14,18 @@
             display: none;
         }
     }
+
+    &__search {
+        position: relative;
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        &-icon {
+            position: absolute;
+            right: 0;
+        }
+        &-input {
+            height: 3.6rem;
+        }
+    }
 }
