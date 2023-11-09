@@ -12,6 +12,9 @@
 
 .searchbar-container {
   padding-bottom: 2rem;
+  @include tablet {
+    width: 40%;
+  }
 }
 
 .warehouse {
@@ -19,13 +22,20 @@
   flex-direction: column;
   padding: 2rem 40px 2rem;
   border-bottom: 1px solid #bdc5d5;
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   &__add-button {
     background-color: #2e66e5;
     color: white;
-    height: 40px;
+    height: 36px;
     border-radius: 20px;
     border: none;
+    @include tablet {
+      width: 22%;
+    }
   }
   &__list {
     display: flex;
@@ -56,6 +66,9 @@
   }
   &__header {
     padding-bottom: 2rem;
+    @include tablet {
+      width: 25%;
+    }
   }
 }
 
@@ -65,33 +78,24 @@
   position: absolute;
   right: 15%;
   top: 14%;
+  @include tablet {
+    right: 33%;
+    top: 5.5%;
+  }
 }
 
 .parent-container {
   display: flex;
   justify-content: space-between;
   padding: 0 40px;
-  //   justify-content: space-between;
-  //   align-items: flex-start;
   width: 100%;
-  //   padding-bottom: 2rem;
-  //   border-bottom: 1px solid #bdc5d5;
 }
 
 .flexbox1 {
   display: flex;
   flex-direction: column;
-  //   width: 40%;
-  //   margin-left: 40px;
 }
 
-.flexbox2 {
-  //   padding-left: 40px;
-}
-// .icons {
-//   height: 24px;
-//   width: 24px;
-// }
 .icon-container {
   display: flex;
   justify-content: space-between;
