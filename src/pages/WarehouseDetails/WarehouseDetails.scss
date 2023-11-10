@@ -1,1 +1,41 @@
 @use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
+
+.warehouse-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  border-bottom: 1px solid #bdc5d5;
+
+  &__header {
+    display: flex;
+  }
+}
+.warehouse-info__list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #bdc5d5;
+}
+
+.warehouse-info__list-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+}
+.warehouse-info__list-item2 {
+  display: flex;
+  justify-content: space-between;
+}
+.warehouse-info__flexbox1 {
+  display: flex;
+  flex-direction: column;
+}
+.warehouse-info__flexbox2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: none;
+}

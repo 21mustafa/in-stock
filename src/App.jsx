@@ -6,29 +6,16 @@ import WarehouseEdit from "./pages/WarehouseEdit/WarehouseEdit";
 import InventoryList from "./pages/InventoryList/InventoryList";
 import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
-import warehousesJSON from "./warehous.json";
+// import warehousesJSON from "./warehous.json";
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import axios from "axios";
 
 function App() {
-  const [warehouseDetails, setWarehouseDetails] = useState(warehousesJSON);
+  // const [warehouseDetails, setWarehouseDetails] = useState();
   const [warehouseList, setWarehouseList] = useState([]);
   const [inventoryList, setInventoryList] = useState([]);
-
-  function selectWarehouse(id) {
-    const selectedWarehouse = warehouseDetails.find(
-      (warehouse) => warehouse.id === id
-    );
-
-    setWarehouseList(selectedWarehouse);
-  }
-
-  useEffect(() => {
-    void getInventoryList();
-    void getWarehouseList();
-  }, []);
 
   const getInventoryList = async () => {
     const response = await axios.get("http://localhost:8080/inventories");
@@ -38,7 +25,22 @@ function App() {
   const getWarehouseList = async () => {
     const response = await axios.get("http://localhost:8080/warehouses");
     setWarehouseList(response.data);
+    console.log(response.data);
+    // console.log("hi:", response.data);
   };
+  // console.log("lala", warehouseList);
+
+  useEffect(() => {
+    void getInventoryList();
+    void getWarehouseList();
+  }, []);
+
+  function selectWarehouse(id) {
+    const selectedWarehouse = warehouseList.find(
+      (warehouse) => warehouse.id === id
+    );
+    setWarehouseList(selectedWarehouse);
+  }
 
   return (
     <div className="app">
@@ -52,7 +54,10 @@ function App() {
                 path="/"
                 element={<WarehouseList warehouseList={warehouseList} />}
               />
-              <Route path="/details" element={<WarehouseDetails />} />
+              <Route
+                path="/details/:id"
+                element={<WarehouseDetails warehouseList={warehouseList} />}
+              />
               <Route path="/edit" element={<WarehouseEdit />} />
               <Route
                 path="/inventory/list"
