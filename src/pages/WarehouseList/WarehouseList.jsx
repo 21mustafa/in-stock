@@ -4,9 +4,10 @@ import searchIcon from "../../assets/icons/search-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import forwardIcon from "../../assets/icons/chevron_right-24px.svg";
+import sortIcon from "../../assets/icons/sort-24px.svg";
+import { Link } from "react-router-dom";
 
 function WarehouseList(props) {
-  console.log("props:", props);
   return (
     <>
       <div className="warehouse">
@@ -30,10 +31,12 @@ function WarehouseList(props) {
                 <div className="flexbox1">
                   <div className="warehouse__description-container">
                     <span className="warehouse__label">Warehouse</span>
-                    <p className="warehouse__city">
-                      {warehouse.city}
-                      <img src={forwardIcon} alt="link icon" />
-                    </p>
+                    <Link to={`/details/${warehouse.id}`}>
+                      <p className="warehouse__city">
+                        {warehouse.city}
+                        <img src={forwardIcon} alt="link icon" />
+                      </p>
+                    </Link>
                   </div>
                   <div className="warehouse__description-container">
                     <span className="warehouse__label">Address</span>
@@ -63,6 +66,21 @@ function WarehouseList(props) {
             </li>
           );
         })}
+      </ul>
+      <ul className="warehouse__list-row">
+        <li className="warehouse__label">
+          WAREHOUSE <img src={sortIcon} />
+        </li>
+        <li className="warehouse__label">
+          ADDRESS <img src={sortIcon} />
+        </li>
+        <li className="warehouse__label">
+          CONTACT NAME <img src={sortIcon} />
+        </li>
+        <li className="warehouse__label">
+          CONTACT INFORMATION <img src={sortIcon} />
+        </li>
+        <li className="warehouse__label">ACTIONS</li>
       </ul>
     </>
   );

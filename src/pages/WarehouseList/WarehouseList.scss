@@ -40,6 +40,18 @@
   &__list {
     display: flex;
     flex-direction: column;
+    @include tablet {
+      display: none;
+    }
+  }
+  &__list-row {
+    display: none;
+    @include tablet {
+      display: flex;
+      justify-content: space-evenly;
+      list-style-type: none;
+      background-color: #f7f8f9b2;
+    }
   }
 
   &__list-item {
@@ -53,6 +65,10 @@
     font-weight: 600;
     color: #5c667e;
     line-height: 2rem;
+    @include tablet {
+      display: flex;
+      align-items: center;
+    }
   }
   &__city {
     color: #2e66e5;
@@ -76,11 +92,11 @@
   height: 24px;
   width: 24px;
   position: absolute;
-  right: 15%;
-  top: 14%;
+  right: 14%;
+  top: 4.5%;
   @include tablet {
     right: 33%;
-    top: 5.5%;
+    top: 20.7%;
   }
 }
 
