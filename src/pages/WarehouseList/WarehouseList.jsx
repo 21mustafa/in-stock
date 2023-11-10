@@ -1,12 +1,12 @@
-import React from "react";
-import "./WarehouseList.scss";
-import searchIcon from "../../assets/icons/search-24px.svg";
-import editIcon from "../../assets/icons/edit-24px.svg";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import forwardIcon from "../../assets/icons/chevron_right-24px.svg";
+import React from 'react';
+import './WarehouseList.scss';
+import searchIcon from '../../assets/icons/search-24px.svg';
+import editIcon from '../../assets/icons/edit-24px.svg';
+import deleteIcon from '../../assets/icons/delete_outline-24px.svg';
+import forwardIcon from '../../assets/icons/chevron_right-24px.svg';
+import { Link } from 'react-router-dom';
 
 function WarehouseList(props) {
-  console.log("props:", props);
   return (
     <>
       <div className="warehouse">
@@ -58,7 +58,9 @@ function WarehouseList(props) {
               </div>
               <div className="icon-container">
                 <img className="icons" src={deleteIcon} alt="delete icon" />
-                <img className="icons" src={editIcon} alt="edit icon" />
+                <Link to={`/edit/${warehouse.id}`}>
+                  <img className="icons" src={editIcon} alt="edit icon" />
+                </Link>
               </div>
             </li>
           );
