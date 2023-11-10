@@ -118,7 +118,7 @@ function InventoryList(props) {
         <img src={searchIcon} className="list__search-icon" alt="search icon" />
       </div>
 
-      <Link to={`/inventory/edit`}>+ Add New Item</Link>
+      <Link to={`/inventory/add`}>+ Add New Item</Link>
 
       <table className="list__table--large">
         <tr className="list__table-row">
