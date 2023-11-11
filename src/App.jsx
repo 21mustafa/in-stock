@@ -1,19 +1,18 @@
-import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
-import './App.scss';
-import WarehouseList from './pages/WarehouseList/WarehouseList';
-import WarehouseDetails from './pages/WarehouseDetails/WarehouseDetails';
-import WarehouseEdit from './pages/WarehouseEdit/WarehouseEdit';
-import InventoryList from './pages/InventoryList/InventoryList';
-import InventoryDetail from './pages/InventoryDetail/InventoryDetail';
-import InventoryEdit from './pages/InventoryEdit/InventoryEdit';
-import warehousesJSON from './warehous.json';
-import { useEffect, useState } from 'react';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import axios from 'axios';
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import "./App.scss";
+import WarehouseList from "./pages/WarehouseList/WarehouseList";
+import WarehouseDetails from "./pages/WarehouseDetails/WarehouseDetails";
+import WarehouseEdit from "./pages/WarehouseEdit/WarehouseEdit";
+import InventoryList from "./pages/InventoryList/InventoryList";
+import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
+import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
+import { useEffect, useState } from "react";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import axios from "axios";
 
 function App() {
-  const [warehouseDetails, setWarehouseDetails] = useState(warehousesJSON);
+  const [warehouseDetails, setWarehouseDetails] = useState();
   const [warehouseList, setWarehouseList] = useState([]);
   const [inventoryList, setInventoryList] = useState([]);
 
