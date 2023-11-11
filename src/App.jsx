@@ -30,12 +30,12 @@ function App() {
   }, []);
 
   const getInventoryList = async () => {
-    const response = await axios.get("http://localhost:8080/inventories");
+    const response = await axios.get('http://localhost:8080/inventories');
     setInventoryList(response.data);
   };
 
   const getWarehouseList = async () => {
-    const response = await axios.get("http://localhost:8080/warehouses");
+    const response = await axios.get('http://localhost:8080/warehouses');
     setWarehouseList(response.data);
   };
 
@@ -52,7 +52,10 @@ function App() {
                 element={<WarehouseList warehouseList={warehouseList} />}
               />
               <Route path="/details" element={<WarehouseDetails />} />
-              <Route path="/edit" element={<WarehouseEdit />} />
+              <Route
+                path="/edit/:id"
+                element={<WarehouseEdit warehouseList={warehouseList} />}
+              />
               <Route
                 path="/inventory/list"
                 element={<InventoryList inventoryList={inventoryList} />}
