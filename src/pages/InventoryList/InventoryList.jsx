@@ -49,10 +49,15 @@ function InventoryList(props) {
               <div className="list__row-item">
                 <div className="list__row-label">INVENTORY ITEM</div>
                 <Link
-                  className="list__row-value"
+                  className="list__row-value--link"
                   to={`/inventory/detail/${item.id}`}
                 >
                   {item.item_name}
+                  <img
+                    className="list__row-icon"
+                    src={forwardIcon}
+                    alt="icon"
+                  />
                 </Link>
               </div>
               <div className="list__row-item">
@@ -63,7 +68,15 @@ function InventoryList(props) {
             <div className="list__row-items">
               <div className="list__row-item">
                 <div className="list__row-label">STATUS</div>
-                <div className="list__row-value">{item.status}</div>
+                <div
+                  className={
+                    item.status.toLowerCase().includes("in stock")
+                      ? "list__row-value--tag-success"
+                      : "list__row-value--tag-fail"
+                  }
+                >
+                  {item.status}
+                </div>
               </div>
               <div className="list__row-item">
                 <div className="list__row-label">QTY</div>
@@ -71,7 +84,13 @@ function InventoryList(props) {
               </div>
               <div className="list__row-item">
                 <div className="list__row-label">WAREHOUSE</div>
-                <div className="list__row-value">{item.warehouse_id}</div>
+                <div className="list__row-value">
+                  {
+                    props.warehouseList.find(
+                      (warehouse) => warehouse.id === item.warehouse_id
+                    ).warehouse_name
+                  }
+                </div>
               </div>
             </div>
           </div>
