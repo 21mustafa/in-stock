@@ -8,7 +8,6 @@ import back from "../../assets/icons/arrow_back-24px.svg";
 
 function InventoryEdit(props) {
   const params = useParams();
-
   // console.log(params.id);
 
   const [selectedInventory, setSelectedInventory] = useState({
@@ -17,7 +16,7 @@ function InventoryEdit(props) {
     description: "",
     category: "",
     status: "",
-    quantity: "",
+    // quantity: "",
   });
 
   const [warehouseList, setWarehouseList] = useState([]);
@@ -58,32 +57,35 @@ function InventoryEdit(props) {
       ...selectedInventory,
       status: e.target.value,
     });
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
-  // const handleWarehouseChange = (e) => {
-  //   console.log(e.target.value);
-  //   setSelectedInventory(JSON.parse(e.target.value));
-  // };
+  const handleWarehouseChange = (e) => {
+    setSelectedInventory({
+      ...selectedInventory,
+      warehouse_id: e.target.value,
+    });
+  };
   //
 
   const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log(selectedInventory.warehouse_id);
     try {
-      const response = await axios.post(
-        `http://localhost:5050/inventories/${params.id}`,
+      const response = await axios.put(
+        `http://localhost:8080/inventories/${params.id}`,
         {
-          warehouse_id: e.target.warehouse_id.value,
-          item_name: e.target.item_name.value,
-          description: e.target.description.value,
-          category: e.target.category.value,
-          status: e.target.status.value,
-          quantity: e.target.quantity.value,
+          warehouse_id: selectedInventory.warehouse_id,
+          item_name: selectedInventory.item_name,
+          description: selectedInventory.description,
+          category: selectedInventory.category,
+          status: selectedInventory.status,
+          // quantity: selectedInventory.quantity,
         }
       );
-      navigate("/");
+      navigate("/inventory/list");
     } catch (err) {
-      console.log("form not submitted");
+      console.log("form not submitted", err);
     }
   };
 
@@ -98,11 +100,11 @@ function InventoryEdit(props) {
         <h1 className="inventoryEdit__h1">Edit Inventory Item</h1>
       </div>
 
-      <form className="form" onSubmit={handleFormSubmit}>
-        <section className="form-section1">
+      <form className="inventoryEditForm" onSubmit={handleFormSubmit}>
+        <section className="inventoryEditForm-section1">
           <h2 className="inventoryEdit__h2">Item Details</h2>
 
-          <div className="form__name">
+          <div className="inventoryEditForm__name">
             <label className="inventoryEdit__h3">Item Name</label>
             <input
               className="input-name"
@@ -119,8 +121,8 @@ function InventoryEdit(props) {
             />
           </div>
 
-          <div className="form__description">
-            <label className="inventory__h3">Description</label>
+          <div className="inventoryEditForm__description">
+            <label className="inventoryEdit__h3">Description</label>
             <textarea
               className="input-description"
               name="item-description"
@@ -137,8 +139,8 @@ function InventoryEdit(props) {
             ></textarea>
           </div>
 
-          <div className="form__category">
-            <label className="inventory__h3">Category</label>
+          <div className="inventoryEditForm__category">
+            <label className="inventoryEdit__h3">Category</label>
 
             <select
               className="input__category"
@@ -159,14 +161,14 @@ function InventoryEdit(props) {
           </div>
         </section>
 
-        <section className="form-section2">
-          <h2 className="inventory__h2">Item Availability</h2>
+        <section className="inventoryEditForm-section2">
+          <h2 className="inventoryEdit__h2">Item Availability</h2>
 
-          <div className="form__status">
-            <h3 className="inventory__h3">Status</h3>
+          <div className="inventoryEditForm__status">
+            <h3 className="inventoryEdit__h3">Status</h3>
 
-            <div className="form__radio">
-              <section className="form__radio-input">
+            <div className="inventoryEditForm__radio">
+              <section className="inventoryEditForm__radio-input">
                 <input
                   className="input__status"
                   type="radio"
@@ -181,7 +183,7 @@ function InventoryEdit(props) {
                 </label>
               </section>
 
-              <section className="form__radio-input">
+              <section className="inventoryEditForm__radio-input">
                 <input
                   className="input__status"
                   type="radio"
@@ -198,34 +200,17 @@ function InventoryEdit(props) {
             </div>
           </div>
 
-          <div className="form__warehouse">
-            <label className="inventory__h3">Warehouse</label>
+          <div className="inventoryEditForm__warehouse">
+            <label className="inventoryEdit__h3">Warehouse</label>
 
-            {/* <select
+            <select
               className="input__warehouse"
               onChange={handleWarehouseChange}
-              // defaultValue={selectedInventory}
+              value={selectedInventory.warehouse_id}
             >
               {warehouseList.map((warehouse) => {
                 return (
-                  <option
-                    key={warehouse.id}
-                    value={JSON.stringify(warehouse)}
-                    // selected={selectedInventory.item_name}
-                  >
-                    {warehouse.warehouse_name}
-                  </option>
-                );
-              })}
-            </select> */}
-
-            <select className="input__warehouse">
-              {warehouseList.map((warehouse) => {
-                return (
-                  <option
-                    key={warehouse.id}
-                    selected={selectedInventory.warehouse_id === warehouse.id}
-                  >
+                  <option key={warehouse.id} value={warehouse.id}>
                     {warehouse.warehouse_name}
                   </option>
                 );
@@ -234,7 +219,7 @@ function InventoryEdit(props) {
           </div>
         </section>
 
-        <div className="form__buttons">
+        <div className="inventoryEditForm__buttons">
           <Link to="/inventory/list" className="button">
             <input
               className="button button__cancel"
