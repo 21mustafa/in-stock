@@ -16,7 +16,7 @@ function InventoryEdit(props) {
     description: "",
     category: "",
     status: "",
-    // quantity: "",
+    quantity: "",
   });
 
   const [warehouseList, setWarehouseList] = useState([]);
@@ -80,7 +80,7 @@ function InventoryEdit(props) {
           description: selectedInventory.description,
           category: selectedInventory.category,
           status: selectedInventory.status,
-          // quantity: selectedInventory.quantity,
+          quantity: selectedInventory.quantity,
         }
       );
       navigate("/inventory/list");
@@ -199,6 +199,22 @@ function InventoryEdit(props) {
                   </label>
                 </section>
               </div>
+            </div>
+
+            <div className="inventoryEditForm__quantity">
+              <label className="inventoryEdit__h3">Quantity</label>
+              <input
+                className="input-quantity"
+                type="text"
+                name="item-quantity"
+                value={selectedInventory.quantity}
+                onChange={(e) =>
+                  setSelectedInventory({
+                    ...selectedInventory,
+                    quantity: e.target.value,
+                  })
+                }
+              />
             </div>
 
             <div className="inventoryEditForm__warehouse">
