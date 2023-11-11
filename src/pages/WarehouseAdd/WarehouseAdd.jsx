@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import './WarehouseEdit.scss';
-import { useParams, useNavigate } from 'react-router-dom';
+import './WarehouseAdd.scss';
+
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import axios from 'axios';
 
 const validator = require('validator');
@@ -14,11 +16,10 @@ function isValidPhoneNumber(phoneNumber) {
   return formats.some((format) => format.test(phoneNumber));
 }
 
-function WarehouseEdit() {
-  const params = useParams();
+function WarehouseAdd() {
   const navigate = useNavigate();
 
-  const [selectedWarehouse, setSelectedWarehouse] = useState({
+  const [formData, setFormData] = useState({
     warehouse_name: '',
     address: '',
     city: '',
@@ -29,169 +30,159 @@ function WarehouseEdit() {
     contact_email: '',
   });
 
-  // need to add a try/catch below
-
-  useEffect(() => {
-    const getSelectedWarehouse = async () => {
-      const response = await axios.get(
-        `http://localhost:8080/warehouses/${params.id}`
-      );
-      setSelectedWarehouse(response.data);
-      // console.log('response data', response.data);
-    };
-    getSelectedWarehouse();
-  }, [params.id]);
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      if (!isValidPhoneNumber(selectedWarehouse.contact_phone)) {
+      if (
+        !formData.warehouse_name ||
+        !formData.address ||
+        !formData.city ||
+        !formData.country ||
+        !formData.contact_name ||
+        !formData.contact_position ||
+        !formData.contact_phone ||
+        !formData.contact_email
+      ) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      if (!isValidPhoneNumber(formData.contact_phone)) {
         alert(
           'Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)'
         );
       }
 
-      if (!validator.isEmail(selectedWarehouse.contact_email)) {
+      if (!validator.isEmail(formData.contact_email)) {
         alert(
           'Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)'
         );
         return;
       }
 
-      await axios.put(`http://localhost:8080/warehouses/${params.id}`, {
-        warehouse_name: selectedWarehouse.warehouse_name,
-        address: selectedWarehouse.address,
-        city: selectedWarehouse.city,
-        country: selectedWarehouse.country,
-        contact_name: selectedWarehouse.contact_name,
-        contact_position: selectedWarehouse.contact_position,
-        contact_phone: selectedWarehouse.contact_phone,
-        contact_email: selectedWarehouse.contact_email,
-      });
-      alert('Successfully Edited Warehouse!');
+      await axios.post(`http://localhost:8080/warehouses`, formData);
+      alert('Successfully Added Warehouse!');
       navigate('/');
     } catch (err) {
-      console.log(err);
+      console.log('Failed to add warehouse', err);
     }
   };
 
   return (
     <>
       <form className="warehouseedit" onSubmit={handleFormSubmit}>
-        <h1 className="warehouseedit__header">Edit Warehouses</h1>
+        <h1 className="warehouseedit__header">Add New Warehouse</h1>
         <div className="warehouseedit__details">
           <h2 className="warehouseedit__details-header">Warehouse Details</h2>
           Warehouse Name
           <input
             className="warehouseedit__name"
             type="text"
-            value={selectedWarehouse.warehouse_name}
+            placeholder="Warehouse Name"
+            value={formData.warehouse_name}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 warehouse_name: e.target.value,
               })
             }
-            required
           />
           Street Address
           <input
             className="warehouseedit__street"
             type="text"
-            value={selectedWarehouse.address}
+            placeholder="Street Address"
+            value={formData.address}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 address: e.target.value,
               })
             }
-            required
           />
           City
           <input
             className="warehouseedit__cityedit"
             type="text"
-            value={selectedWarehouse.city}
+            placeholder="City"
+            value={formData.city}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 city: e.target.value,
               })
             }
-            required
           />
           Country
           <input
             className="warehouseedit__country"
             type="text"
-            value={selectedWarehouse.country}
+            placeholder="Country"
+            value={formData.country}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 country: e.target.value,
               })
             }
-            required
           />
         </div>
-
         <div className="warehouseedit__contacts">
           <h2 className="warehouseedit__contacts-header">Contact Details</h2>
           Contact Name
           <input
             className="warehouseedit__name"
             type="text"
-            value={selectedWarehouse.contact_name}
+            placeholder="Contact Name"
+            value={formData.contact_name}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 contact_name: e.target.value,
               })
             }
-            required
           />
           Position
           <input
             className="warehouseedit__position"
             type="text"
-            value={selectedWarehouse.contact_position}
+            placeholder="Position"
+            value={formData.contact_position}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 contact_position: e.target.value,
               })
             }
-            required
           />
           Phone Number
           <input
             className="warehouseedit__phone"
             type="text"
-            value={selectedWarehouse.contact_phone}
+            placeholder="Phone Number"
+            value={formData.contact_phone}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 contact_phone: e.target.value,
               })
             }
-            required
           />
           Email
           <input
             className="warehouseedit__email"
             type="text"
-            value={selectedWarehouse.contact_email}
+            placeholder="Email"
+            value={formData.contact_email}
             onChange={(e) =>
-              setSelectedWarehouse({
-                ...selectedWarehouse,
+              setFormData({
+                ...formData,
                 contact_email: e.target.value,
               })
             }
-            required
           />
         </div>
-
         <div className="warehouseedit__button-container">
           <button className="warehouseedit__button warehouseedit__button-cancel">
             Cancel
@@ -200,7 +191,7 @@ function WarehouseEdit() {
             className="warehouseedit__button warehouseedit__button-save"
             type="submit"
           >
-            Save
+            + Add Warehouse
           </button>
         </div>
       </form>
@@ -208,4 +199,4 @@ function WarehouseEdit() {
   );
 }
 
-export default WarehouseEdit;
+export default WarehouseAdd;
