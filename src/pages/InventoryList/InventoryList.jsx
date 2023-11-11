@@ -5,34 +5,96 @@ import searchIcon from "../../assets/icons/search-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import forwardIcon from "../../assets/icons/chevron_right-24px.svg";
+import sortIcon from "../../assets/icons/sort-24px.svg";
+
 import { Link } from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
+
+const sortOrder = ["ASC", "DES"];
 
 function InventoryList(props) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sort, setSort] = useState({ order: null, field: null });
 
-  const inventoryList = props.inventoryList.filter((item) =>
-    item.item_name.toLowerCase().includes(searchTerm)
-  );
+  const filteredInventoryList = props.inventoryList
+    .map((item) => ({
+      ...item,
+      warehouse: props.warehouseList.find(
+        (warehouse) => warehouse.id === item.warehouse_id
+      ).warehouse_name,
+    }))
+    .filter((item) => item.item_name.toLowerCase().includes(searchTerm));
+
+  let inventoryList;
+  if (sort.order !== null && sort.field) {
+    inventoryList = filteredInventoryList.sort((a, b) => {
+      if (sortOrder[sort.order] === "ASC") {
+        if (typeof a[sort.field] === "number") {
+          return a[sort.field] > b[sort.field] ? 1 : -1;
+        } else {
+          return a[sort.field].localeCompare(b[sort.field]);
+        }
+      } else {
+        if (typeof a[sort.field] === "number") {
+          return a[sort.field] < b[sort.field] ? 1 : -1;
+        } else {
+          return b[sort.field].localeCompare(a[sort.field]);
+        }
+      }
+    });
+  } else {
+    inventoryList = filteredInventoryList;
+  }
+
+  const onSort = (field) => {
+    const nextSort = (sort.order + 1) % 2;
+    setSort({
+      field,
+      order: nextSort,
+    });
+  };
 
   const getTableRows = () => {
     return inventoryList.map((item) => {
       return (
         <tr className="list__table-row">
-          <td className="list__table-data">
-            <Link to={`/inventory/detail/${item.id}`}>{item.item_name}</Link>
+          <td className="list__table-data--first">
+            <Link
+              className="list__value--link"
+              to={`/inventory/detail/${item.id}`}
+            >
+              {item.item_name}
+              <img className="list__icon" src={forwardIcon} alt="icon" />
+            </Link>
           </td>
           <td className="list__table-data">{item.category}</td>
-          <td className="list__table-data">{item.status}</td>
+          <td className="list__table-data">
+            <div
+              className={
+                item.status.toLowerCase().includes("in stock")
+                  ? "list__tag--success"
+                  : "list__tag--fail"
+              }
+            >
+              {item.status}
+            </div>
+          </td>
           <td className="list__table-data">{item.quantity}</td>
-          <td className="list__table-data">{item.warehouse_id}</td>
+          <td className="list__table-data">{item.warehouse}</td>
           <td className="list__table-data--icon">
-            <button onClick={() => setIsPopupOpen(true)}>
-              <img className="icons" src={deleteIcon} alt="delete icon" />
+            <button
+              className="list__table-icon"
+              onClick={() => setIsPopupOpen(true)}
+            >
+              <img src={deleteIcon} alt="delete icon" />
             </button>
             <Link to={`/inventory/edit/${item.id}`}>
-              <img className="icons" src={editIcon} alt="edit icon" />
+              <img
+                className="list__table-icon"
+                src={editIcon}
+                alt="edit icon"
+              />
             </Link>
           </td>
         </tr>
@@ -49,10 +111,11 @@ function InventoryList(props) {
               <div className="list__row-item">
                 <div className="list__row-label">INVENTORY ITEM</div>
                 <Link
-                  className="list__row-value"
+                  className="list__value--link"
                   to={`/inventory/detail/${item.id}`}
                 >
                   {item.item_name}
+                  <img className="list__icon" src={forwardIcon} alt="icon" />
                 </Link>
               </div>
               <div className="list__row-item">
@@ -63,7 +126,15 @@ function InventoryList(props) {
             <div className="list__row-items">
               <div className="list__row-item">
                 <div className="list__row-label">STATUS</div>
-                <div className="list__row-value">{item.status}</div>
+                <div
+                  className={
+                    item.status.toLowerCase().includes("in stock")
+                      ? "list__tag--success"
+                      : "list__tag--fail"
+                  }
+                >
+                  {item.status}
+                </div>
               </div>
               <div className="list__row-item">
                 <div className="list__row-label">QTY</div>
@@ -71,7 +142,7 @@ function InventoryList(props) {
               </div>
               <div className="list__row-item">
                 <div className="list__row-label">WAREHOUSE</div>
-                <div className="list__row-value">{item.warehouse_id}</div>
+                <div className="list__row-value">{item.warehouse}</div>
               </div>
             </div>
           </div>
@@ -134,13 +205,83 @@ function InventoryList(props) {
       </div>
 
       <table className="list__table--large">
-        <tr className="list__table-row">
-          <th className="list__table-header">Inventory Item</th>
-          <th className="list__table-header">Category</th>
-          <th className="list__table-header">Status</th>
-          <th className="list__table-header">Qty</th>
-          <th className="list__table-header">Warehouse</th>
-          <th className="list__table-header">Actions</th>
+        <tr className="list__table-row--header">
+          <th className="list__table-header--first">
+            <button
+              className="list__table-header-content"
+              onClick={() => {
+                onSort("item_name");
+              }}
+            >
+              <span>Inventory Item</span>
+              <img
+                className="list__table-header-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
+          </th>
+          <th className="list__table-header">
+            <button
+              className="list__table-header-content"
+              onClick={() => {
+                onSort("category");
+              }}
+            >
+              <span>Category</span>
+              <img
+                className="list__table-header-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
+          </th>
+          <th className="list__table-header">
+            <button
+              className="list__table-header-content"
+              onClick={() => {
+                onSort("status");
+              }}
+            >
+              <span>Status</span>
+              <img
+                className="list__table-header-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
+          </th>
+          <th className="list__table-header">
+            <button
+              className="list__table-header-content"
+              onClick={() => {
+                onSort("quantity");
+              }}
+            >
+              <span>Qty</span>
+              <img
+                className="list__table-header-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
+          </th>
+          <th className="list__table-header">
+            <button
+              className="list__table-header-content"
+              onClick={() => {
+                onSort("warehouse");
+              }}
+            >
+              <span>Warehouse</span>
+              <img
+                className="list__table-header-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
+          </th>
+          <th className="list__table-header--last">Actions</th>
         </tr>
         {getTableRows()}
       </table>
