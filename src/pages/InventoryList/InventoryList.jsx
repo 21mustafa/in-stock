@@ -108,17 +108,28 @@ function InventoryList(props) {
         />
       )}
 
-      <h1 className="list__header">Inventory</h1>
-      <div className="list__search">
-        <input
-          type="text"
-          className="list__search-input"
-          onChange={(event) => setSearchTerm(event.target.value.toLowerCase())}
-        />
-        <img src={searchIcon} className="list__search-icon" alt="search icon" />
-      </div>
+      <div className="list__header">
+        <h1 className="list__head">Inventory</h1>
+        <div className="list__search">
+          <input
+            type="text"
+            className="list__search-input"
+            placeholder="Search..."
+            onChange={(event) =>
+              setSearchTerm(event.target.value.toLowerCase())
+            }
+          />
+          <img
+            src={searchIcon}
+            className="list__search-icon"
+            alt="search icon"
+          />
+        </div>
 
-      <Link to={`/inventory/edit`}>+ Add New Item</Link>
+        <Link className="list__search-link" to={`/inventory/edit`}>
+          + Add New Item
+        </Link>
+      </div>
 
       <table className="list__table--large">
         <tr className="list__table-row">

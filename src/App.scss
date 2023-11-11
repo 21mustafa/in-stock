@@ -29,6 +29,7 @@ body {
 
 .content {
   background-color: $background-colors-2;
+  padding: 0 2rem;
 
   @include tablet {
     padding: 0 3rem;
@@ -42,7 +43,7 @@ body {
     background-color: $primary-colors-3;
     position: relative;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 4px;
     box-shadow: 5px 5px 10px 0 #13182c1a;
     margin-top: 3rem;
   }
