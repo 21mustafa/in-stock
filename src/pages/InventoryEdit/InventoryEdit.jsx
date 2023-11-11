@@ -101,135 +101,137 @@ function InventoryEdit(props) {
       </div>
 
       <form className="inventoryEditForm" onSubmit={handleFormSubmit}>
-        <section className="inventoryEditForm-section1">
-          <h2 className="inventoryEdit__h2">Item Details</h2>
+        <div className="inventoryEditForm-sections">
+          <section className="inventoryEditForm-section1">
+            <h2 className="inventoryEdit__h2">Item Details</h2>
 
-          <div className="inventoryEditForm__name">
-            <label className="inventoryEdit__h3">Item Name</label>
-            <input
-              className="input-name"
-              type="text"
-              name="item-name"
-              value={selectedInventory.item_name}
-              onChange={(e) =>
-                setSelectedInventory({
-                  ...selectedInventory,
-                  item_name: e.target.value,
-                })
-              }
-              required
-            />
-          </div>
-
-          <div className="inventoryEditForm__description">
-            <label className="inventoryEdit__h3">Description</label>
-            <textarea
-              className="input-description"
-              name="item-description"
-              cols="30"
-              rows="10"
-              value={selectedInventory.description}
-              onChange={(e) =>
-                setSelectedInventory({
-                  ...selectedInventory,
-                  description: e.target.value,
-                })
-              }
-              required
-            ></textarea>
-          </div>
-
-          <div className="inventoryEditForm__category">
-            <label className="inventoryEdit__h3">Category</label>
-
-            <select
-              className="input__category"
-              value={selectedInventory.category}
-              onChange={(e) =>
-                setSelectedInventory({
-                  ...selectedInventory,
-                  category: e.target.value,
-                })
-              }
-            >
-              {categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </section>
-
-        <section className="inventoryEditForm-section2">
-          <h2 className="inventoryEdit__h2">Item Availability</h2>
-
-          <div className="inventoryEditForm__status">
-            <h3 className="inventoryEdit__h3">Status</h3>
-
-            <div className="inventoryEditForm__radio">
-              <section className="inventoryEditForm__radio-input">
-                <input
-                  className="input__status"
-                  type="radio"
-                  name="stockStatus"
-                  id="in-stock"
-                  value="In Stock"
-                  checked={selectedInventory.status === "In Stock"}
-                  onChange={handleStatusChange}
-                />
-                <label className="input__status-label" htmlFor="in-stock">
-                  In Stock
-                </label>
-              </section>
-
-              <section className="inventoryEditForm__radio-input">
-                <input
-                  className="input__status"
-                  type="radio"
-                  name="stockStatus"
-                  id="out-of-stock"
-                  value="Out of Stock"
-                  checked={selectedInventory.status === "Out of Stock"}
-                  onChange={handleStatusChange}
-                />
-                <label className="input__status-label" htmlFor="out-of-stock">
-                  Out of Stock
-                </label>
-              </section>
+            <div className="inventoryEditForm__name">
+              <label className="inventoryEdit__h3">Item Name</label>
+              <input
+                className="input-name"
+                type="text"
+                name="item-name"
+                value={selectedInventory.item_name}
+                onChange={(e) =>
+                  setSelectedInventory({
+                    ...selectedInventory,
+                    item_name: e.target.value,
+                  })
+                }
+                required
+              />
             </div>
-          </div>
 
-          <div className="inventoryEditForm__warehouse">
-            <label className="inventoryEdit__h3">Warehouse</label>
+            <div className="inventoryEditForm__description">
+              <label className="inventoryEdit__h3">Description</label>
+              <textarea
+                className="input-description"
+                name="item-description"
+                cols="30"
+                rows="10"
+                value={selectedInventory.description}
+                onChange={(e) =>
+                  setSelectedInventory({
+                    ...selectedInventory,
+                    description: e.target.value,
+                  })
+                }
+                required
+              ></textarea>
+            </div>
 
-            <select
-              className="input__warehouse"
-              onChange={handleWarehouseChange}
-              value={selectedInventory.warehouse_id}
-            >
-              {warehouseList.map((warehouse) => {
-                return (
-                  <option key={warehouse.id} value={warehouse.id}>
-                    {warehouse.warehouse_name}
+            <div className="inventoryEditForm__category">
+              <label className="inventoryEdit__h3">Category</label>
+
+              <select
+                className="input__category"
+                value={selectedInventory.category}
+                onChange={(e) =>
+                  setSelectedInventory({
+                    ...selectedInventory,
+                    category: e.target.value,
+                  })
+                }
+              >
+                {categories.map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
                   </option>
-                );
-              })}
-            </select>
-          </div>
-        </section>
+                ))}
+              </select>
+            </div>
+          </section>
+
+          <section className="inventoryEditForm-section2">
+            <h2 className="inventoryEdit__h2">Item Availability</h2>
+
+            <div className="inventoryEditForm__status">
+              <h3 className="inventoryEdit__h3">Status</h3>
+
+              <div className="inventoryEditForm__radio">
+                <section className="inventoryEditForm__radio-input">
+                  <input
+                    className="input__status"
+                    type="radio"
+                    name="stockStatus"
+                    id="in-stock"
+                    value="In Stock"
+                    checked={selectedInventory.status === "In Stock"}
+                    onChange={handleStatusChange}
+                  />
+                  <label className="input__status-label" htmlFor="in-stock">
+                    In Stock
+                  </label>
+                </section>
+
+                <section className="inventoryEditForm__radio-input">
+                  <input
+                    className="input__status"
+                    type="radio"
+                    name="stockStatus"
+                    id="out-of-stock"
+                    value="Out of Stock"
+                    checked={selectedInventory.status === "Out of Stock"}
+                    onChange={handleStatusChange}
+                  />
+                  <label className="input__status-label" htmlFor="out-of-stock">
+                    Out of Stock
+                  </label>
+                </section>
+              </div>
+            </div>
+
+            <div className="inventoryEditForm__warehouse">
+              <label className="inventoryEdit__h3">Warehouse</label>
+
+              <select
+                className="input__warehouse"
+                onChange={handleWarehouseChange}
+                value={selectedInventory.warehouse_id}
+              >
+                {warehouseList.map((warehouse) => {
+                  return (
+                    <option key={warehouse.id} value={warehouse.id}>
+                      {warehouse.warehouse_name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </section>
+        </div>
 
         <div className="inventoryEditForm__buttons">
-          <Link to="/inventory/list" className="button">
+          <Link to="/inventory/list" className="inventoryEditButton">
             <input
-              className="button button__cancel"
+              className="inventoryEditButton inventoryEditButton__cancel"
               type="button"
               value="Cancel"
             ></input>
           </Link>
           <input
             type="submit"
-            className="button button__save"
+            className="inventoryEditButton inventoryEditButton__save"
             value="Save"
           ></input>
         </div>

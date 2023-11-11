@@ -5,7 +5,7 @@
   width: 100%;
   &__h1 {
     @include h1;
-    padding-left: 72px;
+    padding-left: 32px;
   }
   &__h2 {
     @include h2;
@@ -30,12 +30,28 @@
 }
 
 .inventoryAddForm {
+  &-sections {
+    @include tablet {
+      display: flex;
+      padding: 40px;
+    }
+  }
   &-section1 {
     padding: 24px 40px;
     border-bottom: 1px solid $secondary-colors-2;
+    @include tablet {
+      width: 50%;
+      border-right: 1px solid $secondary-colors-2;
+      border-bottom: none;
+      padding: 0 40px 0 0;
+    }
   }
   &-section2 {
     padding: 24px 40px;
+    @include tablet {
+      width: 50%;
+      padding: 0 0 0 40px;
+    }
   }
   &__name,
   &__description,
@@ -57,36 +73,58 @@
     display: flex;
     justify-content: space-between;
     background-color: $background-colors-2;
+    @include tablet {
+      justify-content: flex-end;
+    }
   }
 }
 
-.button {
+.inventoryAddButton {
   color: white;
   height: 36px;
   width: 48%;
   border-radius: 20px;
   border: none;
   @include h3;
+  @include tablet {
+    width: inherit;
+    height: 38px;
+  }
   &__cancel {
     background-color: $primary-colors-3;
     border: 1px solid $secondary-colors-2;
     color: $secondary-colors-1;
     text-align: center;
     width: 100%;
+    @include tablet {
+      padding: 0 16px;
+    }
   }
   &__add {
     background-color: $primary-colors-2;
     width: 100%;
+    @include tablet {
+      padding: 0 16px;
+    }
     &-label {
       position: absolute;
       transform: translate(0%, -50%);
-      left: 4%;
+      left: 8%;
       top: 50%;
       line-height: 0;
+      @include tablet {
+        left: 4px;
+      }
+      &-icon {
+        width: 16px;
+      }
     }
   }
   &-btn {
     position: relative;
+    @include tablet {
+      margin-left: 16px;
+    }
   }
 }
 
