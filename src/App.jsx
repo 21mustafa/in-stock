@@ -7,14 +7,14 @@ import InventoryList from "./pages/InventoryList/InventoryList";
 import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
-import warehousesJSON from "./warehous.json";
+// import warehousesJSON from "./warehous.json";
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import axios from "axios";
 
 function App() {
-  const [warehouseDetails, setWarehouseDetails] = useState(warehousesJSON);
+  const [warehouseDetails, setWarehouseDetails] = useState();
   const [warehouseList, setWarehouseList] = useState([]);
   const [inventoryList, setInventoryList] = useState([]);
 
