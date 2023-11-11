@@ -4,15 +4,14 @@ import WarehouseList from './pages/WarehouseList/WarehouseList';
 import WarehouseDetails from './pages/WarehouseDetails/WarehouseDetails';
 import WarehouseEdit from './pages/WarehouseEdit/WarehouseEdit';
 import WarehouseAdd from './pages/WarehouseAdd/WarehouseAdd';
-
 import InventoryList from './pages/InventoryList/InventoryList';
 import InventoryDetail from './pages/InventoryDetail/InventoryDetail';
 import InventoryEdit from './pages/InventoryEdit/InventoryEdit';
-// import warehousesJSON from './warehous.json';
 import { useEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import axios from 'axios';
+
 
 function App() {
   const [warehouseDetails, setWarehouseDetails] = useState();
