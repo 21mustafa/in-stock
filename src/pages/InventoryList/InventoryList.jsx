@@ -198,7 +198,9 @@ function InventoryList(props) {
             />
           </div>
 
-          <Link to={`/inventory/add`}>+ Add New Item</Link>
+          <Link className="list__search-link" to={`/inventory/add`}>
+            + Add New Item
+          </Link>
         </div>
       </div>
 
