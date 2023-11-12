@@ -41,6 +41,10 @@ function App() {
     setWarehouseList(response.data);
   };
 
+  const refreshInventory = async () => {
+    await getInventoryList();
+  };
+
   return (
     <div className="app">
       <div className="app__background" />
@@ -64,6 +68,7 @@ function App() {
                   <InventoryList
                     inventoryList={inventoryList}
                     warehouseList={warehouseList}
+                    refreshInventory={refreshInventory}
                   />
                 }
               />

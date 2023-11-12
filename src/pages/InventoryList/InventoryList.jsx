@@ -16,7 +16,7 @@ function InventoryList(props) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sort, setSort] = useState({ order: null, field: null });
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const filteredInventoryList = props.inventoryList
     .map((item) => ({
@@ -88,7 +88,7 @@ function InventoryList(props) {
               className="list__table-icon"
               onClick={() => {
                 setIsPopupOpen(true);
-                setSelectedItem(item.item_name);
+                setSelectedItem(item);
               }}
             >
               <img src={deleteIcon} alt="delete icon" />
@@ -156,7 +156,7 @@ function InventoryList(props) {
               className="list__row-action"
               onClick={() => {
                 setIsPopupOpen(true);
-                setSelectedItem(item.item_name);
+                setSelectedItem(item);
               }}
             >
               <img className="icons" src={deleteIcon} alt="delete icon" />
@@ -173,16 +173,24 @@ function InventoryList(props) {
     });
   };
 
+  const handleDelete = async (selectedItem) => {
+    setIsPopupOpen(false);
+    await axios.delete(`http://localhost:8080/inventories/${selectedItem.id}`);
+    await props.refreshInventory();
+  };
+
   return (
     <div className="list">
       {isPopupOpen && (
         <Popup
-          title={`Delete ${selectedItem} inventory item?`}
-          text={`Please confirm that you’d like to delete ${selectedItem} from the inventory list. You won’t be able to undo this action.`}
+          title={`Delete ${selectedItem.item_name} inventory item?`}
+          text={`Please confirm that you’d like to delete ${selectedItem.item_name} from the inventory list. You won’t be able to undo this action.`}
           onCancel={() => {
             setIsPopupOpen(false);
           }}
-          onDelete={() => {}}
+          onDelete={() => {
+            void handleDelete(selectedItem);
+          }}
         />
       )}
 
