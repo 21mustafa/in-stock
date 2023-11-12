@@ -1,6 +1,6 @@
 @use '../../styles/partials/mixin' as *;
 @use '../../styles/partials/variables' as *;
-
+@use '../../styles/partials/mixin' as *;
 input {
   margin: 4px 0 2rem;
   border-radius: 20px;
@@ -28,11 +28,15 @@ button {
     border-bottom: 1px solid $secondary-colors-2;
   }
 
+  &__name {
+    @include form-field;
+  }
   &__details-header {
     margin: 1rem 0 1.5rem;
 
     @include h2;
   }
+
   &__details {
     @include h3;
     display: flex;

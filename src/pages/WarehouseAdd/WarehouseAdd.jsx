@@ -18,7 +18,7 @@ function isValidPhoneNumber(phoneNumber) {
 
 function WarehouseAdd() {
   const navigate = useNavigate();
-
+  const [error, setError] = useState(true);
   const [formData, setFormData] = useState({
     warehouse_name: '',
     address: '',
@@ -77,17 +77,24 @@ function WarehouseAdd() {
           <h2 className="warehouseedit__details-header">Warehouse Details</h2>
           Warehouse Name
           <input
-            className="warehouseedit__name"
+            className={
+              error
+                ? 'warehouseedit__name warehouseedit__name--error'
+                : 'warehouseedit__name '
+            }
             type="text"
             placeholder="Warehouse Name"
             value={formData.warehouse_name}
-            onChange={(e) =>
+            onChange={(e) => {
+              e.target.value !== '' ? setError(false) : setError(true);
+
               setFormData({
                 ...formData,
                 warehouse_name: e.target.value,
-              })
-            }
+              });
+            }}
           />
+          {error && <p>Error</p>}
           Street Address
           <input
             className="warehouseedit__street"
@@ -184,7 +191,10 @@ function WarehouseAdd() {
           />
         </div>
         <div className="warehouseedit__button-container">
-          <button className="warehouseedit__button warehouseedit__button-cancel">
+          <button
+            className="warehouseedit__button warehouseedit__button-cancel"
+            type="button"
+          >
             Cancel
           </button>
           <button
