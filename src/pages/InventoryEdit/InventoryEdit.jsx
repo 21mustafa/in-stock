@@ -108,7 +108,7 @@ function InventoryEdit(props) {
             <div className="inventoryEditForm__name">
               <label className="inventoryEdit__h3">Item Name</label>
               <input
-                className="input-name"
+                className="editInput-name"
                 type="text"
                 name="item-name"
                 value={selectedInventory.item_name}
@@ -125,7 +125,7 @@ function InventoryEdit(props) {
             <div className="inventoryEditForm__description">
               <label className="inventoryEdit__h3">Description</label>
               <textarea
-                className="input-description"
+                className="editInput-description"
                 name="item-description"
                 cols="30"
                 rows="10"
@@ -144,7 +144,7 @@ function InventoryEdit(props) {
               <label className="inventoryEdit__h3">Category</label>
 
               <select
-                className="input__category"
+                className="editInput__category"
                 value={selectedInventory.category}
                 onChange={(e) =>
                   setSelectedInventory({
@@ -171,7 +171,7 @@ function InventoryEdit(props) {
               <div className="inventoryEditForm__radio">
                 <section className="inventoryEditForm__radio-input">
                   <input
-                    className="input__status"
+                    className="editInput__status"
                     type="radio"
                     name="stockStatus"
                     id="in-stock"
@@ -179,14 +179,14 @@ function InventoryEdit(props) {
                     checked={selectedInventory.status === "In Stock"}
                     onChange={handleStatusChange}
                   />
-                  <label className="input__status-label" htmlFor="in-stock">
+                  <label className="editInput__status-label" htmlFor="in-stock">
                     In Stock
                   </label>
                 </section>
 
                 <section className="inventoryEditForm__radio-input">
                   <input
-                    className="input__status"
+                    className="editInput__status"
                     type="radio"
                     name="stockStatus"
                     id="out-of-stock"
@@ -194,7 +194,10 @@ function InventoryEdit(props) {
                     checked={selectedInventory.status === "Out of Stock"}
                     onChange={handleStatusChange}
                   />
-                  <label className="input__status-label" htmlFor="out-of-stock">
+                  <label
+                    className="editInput__status-label"
+                    htmlFor="out-of-stock"
+                  >
                     Out of Stock
                   </label>
                 </section>
@@ -204,7 +207,7 @@ function InventoryEdit(props) {
             <div className="inventoryEditForm__quantity">
               <label className="inventoryEdit__h3">Quantity</label>
               <input
-                className="input-quantity"
+                className="editInput-quantity"
                 type="text"
                 name="item-quantity"
                 value={selectedInventory.quantity}
@@ -221,7 +224,7 @@ function InventoryEdit(props) {
               <label className="inventoryEdit__h3">Warehouse</label>
 
               <select
-                className="input__warehouse"
+                className="editInput__warehouse"
                 onChange={handleWarehouseChange}
                 value={selectedInventory.warehouse_id}
               >
