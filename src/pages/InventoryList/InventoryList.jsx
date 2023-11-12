@@ -16,6 +16,7 @@ function InventoryList(props) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sort, setSort] = useState({ order: null, field: null });
+  const [selectedItem, setSelectedItem] = useState("");
 
   const filteredInventoryList = props.inventoryList
     .map((item) => ({
@@ -85,7 +86,10 @@ function InventoryList(props) {
           <td className="list__table-data--icon">
             <button
               className="list__table-icon"
-              onClick={() => setIsPopupOpen(true)}
+              onClick={() => {
+                setIsPopupOpen(true);
+                setSelectedItem(item.item_name);
+              }}
             >
               <img src={deleteIcon} alt="delete icon" />
             </button>
@@ -150,7 +154,10 @@ function InventoryList(props) {
           <div className="list__row-actions">
             <button
               className="list__row-action"
-              onClick={() => setIsPopupOpen(true)}
+              onClick={() => {
+                setIsPopupOpen(true);
+                setSelectedItem(item.item_name);
+              }}
             >
               <img className="icons" src={deleteIcon} alt="delete icon" />
             </button>
@@ -170,8 +177,8 @@ function InventoryList(props) {
     <div className="list">
       {isPopupOpen && (
         <Popup
-          title="Delete Television inventory item?"
-          text="Please confirm that you’d like to delete Television from the inventory list. You won’t be able to undo this action."
+          title={`Delete ${selectedItem} inventory item?`}
+          text={`Please confirm that you’d like to delete ${selectedItem} from the inventory list. You won’t be able to undo this action.`}
           onCancel={() => {
             setIsPopupOpen(false);
           }}
