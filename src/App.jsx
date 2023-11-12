@@ -7,6 +7,7 @@ import WarehouseAdd from "./pages/WarehouseAdd/WarehouseAdd";
 import InventoryList from "./pages/InventoryList/InventoryList";
 import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
+import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -70,8 +71,11 @@ function App() {
                 path="/inventory/detail/:id"
                 element={<InventoryDetail inventoryList={inventoryList} />}
               />
-              <Route path="/inventory/edit/:id" element={<InventoryEdit />} />
-              <Route path="/inventory/edit" element={<InventoryEdit />} />
+              <Route
+                path="/inventory/edit/:id"
+                element={<InventoryEdit inventoryList={inventoryList} />}
+              />
+              <Route path="/inventory/add" element={<InventoryAdd />} />
             </Routes>
           </main>
         </div>
