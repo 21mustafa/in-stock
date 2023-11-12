@@ -83,9 +83,9 @@ function App() {
               <Route path="/inventory/add" element={<InventoryAdd />} />
             </Routes>
           </main>
+          <Footer />
         </div>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }
