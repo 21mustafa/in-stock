@@ -135,7 +135,6 @@ function WarehouseEdit() {
             required
           />
         </div>
-
         <div className="warehouseedit__contacts">
           <h2 className="warehouseedit__contacts-header">Contact Details</h2>
           Contact Name
