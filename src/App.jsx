@@ -1,8 +1,9 @@
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import WarehouseList from "./pages/WarehouseList/WarehouseList";
 import WarehouseDetails from "./pages/WarehouseDetails/WarehouseDetails";
 import WarehouseEdit from "./pages/WarehouseEdit/WarehouseEdit";
+import WarehouseAdd from "./pages/WarehouseAdd/WarehouseAdd";
 import InventoryList from "./pages/InventoryList/InventoryList";
 import InventoryDetail from "./pages/InventoryDetail/InventoryDetail";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
@@ -40,6 +41,10 @@ function App() {
     setWarehouseList(response.data);
   };
 
+  const refreshInventory = async () => {
+    await getInventoryList();
+  };
+
   return (
     <div className="app">
       <div className="app__background" />
@@ -53,10 +58,19 @@ function App() {
                 element={<WarehouseList warehouseList={warehouseList} />}
               />
               <Route path="/details" element={<WarehouseDetails />} />
-              <Route path="/edit" element={<WarehouseEdit />} />
+              <Route path="/edit/:id" element={<WarehouseEdit />} />
+
+              <Route path="/add" element={<WarehouseAdd />} />
+
               <Route
                 path="/inventory/list"
-                element={<InventoryList inventoryList={inventoryList} />}
+                element={
+                  <InventoryList
+                    inventoryList={inventoryList}
+                    warehouseList={warehouseList}
+                    refreshInventory={refreshInventory}
+                  />
+                }
               />
               <Route
                 path="/inventory/detail/:id"
@@ -69,9 +83,9 @@ function App() {
               <Route path="/inventory/add" element={<InventoryAdd />} />
             </Routes>
           </main>
+          <Footer />
         </div>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

@@ -5,7 +5,7 @@
   width: 100%;
   &__h1 {
     @include h1;
-    padding-left: 72px;
+    padding-left: 32px;
   }
   &__h2 {
     @include h2;
@@ -25,6 +25,7 @@
       left: 40px;
       top: 50%;
       line-height: 0;
+      cursor: pointer;
     }
   }
 }
@@ -85,6 +86,7 @@
   width: 48%;
   border-radius: 20px;
   border: none;
+  cursor: pointer;
   @include h3;
   @include tablet {
     width: inherit;
@@ -98,6 +100,10 @@
     width: 100%;
     @include tablet {
       padding: 0 16px;
+      &:hover {
+        border: 1px solid $primary-colors-2;
+        color: $primary-colors-2;
+      }
     }
   }
   &__save {
@@ -105,12 +111,16 @@
     @include tablet {
       padding: 0 16px;
       margin-left: 16px;
+      &:hover {
+        background-color: $primary-colors-1;
+      }
     }
   }
 }
 
-.input {
-  &-name {
+.editInput {
+  &-name,
+  &-quantity {
     height: 36px;
     border-radius: 20px;
     border: 1px solid $secondary-colors-2;
