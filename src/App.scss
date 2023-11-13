@@ -12,24 +12,15 @@ html {
 }
 
 body {
-  font-family:
-    "TitilliumWeb",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Roboto",
-    "Oxygen",
-    "Ubuntu",
-    "Cantarell",
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    sans-serif;
+  font-family: "TitilliumWeb", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
 }
 
 .content {
   background-color: $background-colors-2;
   padding: 0 2rem;
+  //need to remove height so it doesn't cut off the background color!
   height: 100%;
   @include tablet {
     padding: 0 3rem;

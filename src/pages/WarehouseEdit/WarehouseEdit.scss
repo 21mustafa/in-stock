@@ -1,8 +1,7 @@
-@use '../../styles/partials/mixin' as *;
-@use '../../styles/partials/variables' as *;
+@use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
 
 input {
-  margin: 4px 0 2rem;
   border-radius: 20px;
   height: 36px;
   border: 1px solid $secondary-colors-2;

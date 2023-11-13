@@ -1,11 +1,11 @@
-import './WarehouseAdd.scss';
+import "./WarehouseAdd.scss";
 
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
-const validator = require('validator');
+const validator = require("validator");
 
 function isValidPhoneNumber(phoneNumber) {
   const formats = [
@@ -20,14 +20,14 @@ function WarehouseAdd() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    warehouse_name: '',
-    address: '',
-    city: '',
-    country: '',
-    contact_name: '',
-    contact_position: '',
-    contact_phone: '',
-    contact_email: '',
+    warehouse_name: "",
+    address: "",
+    city: "",
+    country: "",
+    contact_name: "",
+    contact_position: "",
+    contact_phone: "",
+    contact_email: "",
   });
 
   const handleFormSubmit = async (event) => {
@@ -44,28 +44,28 @@ function WarehouseAdd() {
         !formData.contact_phone ||
         !formData.contact_email
       ) {
-        alert('Please fill in all fields.');
+        alert("Please fill in all fields.");
         return;
       }
 
       if (!isValidPhoneNumber(formData.contact_phone)) {
         alert(
-          'Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)'
+          "Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)"
         );
       }
 
       if (!validator.isEmail(formData.contact_email)) {
         alert(
-          'Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)'
+          "Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)"
         );
         return;
       }
 
       await axios.post(`http://localhost:8080/warehouses`, formData);
-      alert('Successfully Added Warehouse!');
-      navigate('/');
+      alert("Successfully Added Warehouse!");
+      navigate("/");
     } catch (err) {
-      console.log('Failed to add warehouse', err);
+      console.log("Failed to add warehouse", err);
     }
   };
 
