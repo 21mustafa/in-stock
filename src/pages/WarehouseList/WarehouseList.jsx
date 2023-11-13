@@ -140,8 +140,8 @@ function WarehouseList(props) {
                     <span className="warehouse__label-mobile">
                       Contact Information
                     </span>
-                    <p className="warehouse__info">{warehouse.contact_phone}</p>
-                    <p className="warehouse__info">{warehouse.contact_email}</p>
+                    <p className="warehouse__span">{warehouse.contact_phone}</p>
+                    <p className="warehouse__span">{warehouse.contact_email}</p>
                   </div>
                 </div>
               </div>
