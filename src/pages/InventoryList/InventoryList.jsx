@@ -9,6 +9,7 @@ import sortIcon from "../../assets/icons/sort-24px.svg";
 
 import { Link } from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
+import { Tag } from "../../components/Tag/Tag";
 
 const sortOrder = ["ASC", "DES"];
 
@@ -21,9 +22,7 @@ function InventoryList(props) {
   const filteredInventoryList = props.inventoryList
     .map((item) => ({
       ...item,
-      warehouse: props.warehouseList.find(
-        (warehouse) => warehouse.id === item.warehouse_id
-      ).warehouse_name,
+      warehouse: props.getWarehouse(item.warehouse_id),
     }))
     .filter((item) => item.item_name.toLowerCase().includes(searchTerm));
 
@@ -71,15 +70,14 @@ function InventoryList(props) {
           </td>
           <td className="list__table-data">{item.category}</td>
           <td className="list__table-data">
-            <div
-              className={
+            <Tag
+              text={item.status}
+              status={
                 item.status.toLowerCase().includes("in stock")
-                  ? "list__tag--success"
-                  : "list__tag--fail"
+                  ? "success"
+                  : "fail"
               }
-            >
-              {item.status}
-            </div>
+            />
           </td>
           <td className="list__table-data">{item.quantity}</td>
           <td className="list__table-data">{item.warehouse}</td>
@@ -130,15 +128,14 @@ function InventoryList(props) {
             <div className="list__row-items">
               <div className="list__row-item">
                 <div className="list__row-label">STATUS</div>
-                <div
-                  className={
+                <Tag
+                  text={item.status}
+                  status={
                     item.status.toLowerCase().includes("in stock")
-                      ? "list__tag--success"
-                      : "list__tag--fail"
+                      ? "success"
+                      : "fail"
                   }
-                >
-                  {item.status}
-                </div>
+                />
               </div>
               <div className="list__row-item">
                 <div className="list__row-label">QTY</div>
