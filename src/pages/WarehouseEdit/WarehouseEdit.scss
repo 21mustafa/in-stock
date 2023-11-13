@@ -1,22 +1,5 @@
 @use '../../styles/partials/mixin' as *;
 @use '../../styles/partials/variables' as *;
-@use '../../styles/partials/mixin' as *;
-input {
-  margin: 4px 0 2rem;
-  border-radius: 20px;
-  height: 36px;
-  border: 1px solid $secondary-colors-2;
-  transition: border-color 0.3s ease;
-  padding: 0 16px;
-
-  &:focus {
-    border-color: $primary-colors-2;
-  }
-}
-
-button {
-  border: none;
-}
 
 .warehouseedit {
   width: 100%;
@@ -26,15 +9,40 @@ button {
     @include h1;
     padding: 2rem 3.5rem;
     border-bottom: 1px solid $secondary-colors-2;
+    @include tablet {
+      padding: 3.2rem 6.24rem 2rem;
+    }
   }
 
+  &__container {
+    @include tablet {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__input {
+    margin: 4px 0 2rem;
+    border-radius: 20px;
+    height: 36px;
+    border: 1px solid $secondary-colors-2;
+    transition: border-color 0.3s ease;
+    padding: 0 16px;
+
+    &:focus {
+      border-color: $primary-colors-2;
+    }
+  }
   &__name {
     @include form-field;
   }
+
   &__details-header {
     margin: 1rem 0 1.5rem;
-
     @include h2;
+    @include tablet {
+      margin: 1.5rem 0;
+    }
   }
 
   &__details {
@@ -43,16 +51,30 @@ button {
     flex-direction: column;
     padding: 0 1.5rem;
     border-bottom: 1px solid $secondary-colors-2;
+    @include tablet {
+      border-bottom: none;
+      width: 90%;
+      margin: 2rem 3.2rem;
+    }
   }
   &__contacts-header {
     margin: 1rem 0 1.5rem;
     @include h2;
+    @include tablet {
+      margin: 1.5rem 0;
+    }
   }
   &__contacts {
     @include h3;
     display: flex;
     flex-direction: column;
     padding: 0 1.5rem;
+    @include tablet {
+      width: 90%;
+      border-left: 1px solid $secondary-colors-2;
+      padding: 0 3.2rem 2rem;
+      margin: 2rem 0;
+    }
   }
 
   &__cityedit {
@@ -66,26 +88,43 @@ button {
     background-color: $background-colors-2;
     height: 7rem;
     padding: 1rem;
+    @include tablet {
+      justify-content: end;
+    }
   }
 
   &__button {
     width: 100%;
     height: 36px;
+    border: none;
     border-radius: 20px;
     background-color: $primary-colors-2;
     color: white;
     margin: 0 1rem;
+
+    @include tablet {
+      width: 10%;
+      height: 38px;
+    }
   }
   &__button-cancel {
     background-color: white;
     color: $secondary-colors-1;
     border: 1px solid $secondary-colors-2;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 0.7rem;
+    @include p2;
+
     &:hover {
       border-color: $primary-colors-2;
       color: $primary-colors-2;
     }
   }
 
-  //   &__button-save {
-  //   }
+  &__button-save {
+    &:hover {
+      background-color: $background-colors-1;
+    }
+  }
 }

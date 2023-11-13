@@ -1,9 +1,10 @@
 import './WarehouseAdd.scss';
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
-
 import axios from 'axios';
+
+import back from '../../assets/icons/arrow_back-24px.svg';
+// import add from "../../assets/icons/add_white_24dp.svg";
 
 const validator = require('validator');
 
@@ -71,134 +72,143 @@ function WarehouseAdd() {
 
   return (
     <>
-      <form className="warehouseedit" onSubmit={handleFormSubmit}>
-        <h1 className="warehouseedit__header">Add New Warehouse</h1>
-        <div className="warehouseedit__details">
-          <h2 className="warehouseedit__details-header">Warehouse Details</h2>
-          Warehouse Name
-          <input
-            className={
-              error
-                ? 'warehouseedit__name warehouseedit__name--error'
-                : 'warehouseedit__name '
-            }
-            type="text"
-            placeholder="Warehouse Name"
-            value={formData.warehouse_name}
-            onChange={(e) => {
-              e.target.value !== '' ? setError(false) : setError(true);
+      <form className="warehouseadd" onSubmit={handleFormSubmit}>
+        <Link to="/">
+          <label htmlFor="back-button" className="warehouseadd__header-label">
+            <img src={back} alt="back icon" />
+          </label>
+        </Link>
+        <h1 className="warehouseadd__header">Add New Warehouse</h1>
+        <div className="warehouseadd__container">
+          <div className="warehouseadd__details">
+            <h2 className="warehouseadd__details-header">Warehouse Details</h2>
+            Warehouse Name
+            <input
+              className={
+                error
+                  ? 'warehouseadd__input warehouseadd__name warehouseadd__name--error'
+                  : 'warehouseadd__name '
+              }
+              type="text"
+              placeholder="Warehouse Name"
+              value={formData.warehouse_name}
+              onChange={(e) => {
+                e.target.value !== '' ? setError(false) : setError(true);
 
-              setFormData({
-                ...formData,
-                warehouse_name: e.target.value,
-              });
-            }}
-          />
-          {error && <p>Error</p>}
-          Street Address
-          <input
-            className="warehouseedit__street"
-            type="text"
-            placeholder="Street Address"
-            value={formData.address}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                address: e.target.value,
-              })
-            }
-          />
-          City
-          <input
-            className="warehouseedit__cityedit"
-            type="text"
-            placeholder="City"
-            value={formData.city}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                city: e.target.value,
-              })
-            }
-          />
-          Country
-          <input
-            className="warehouseedit__country"
-            type="text"
-            placeholder="Country"
-            value={formData.country}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                country: e.target.value,
-              })
-            }
-          />
+                setFormData({
+                  ...formData,
+                  warehouse_name: e.target.value,
+                });
+              }}
+            />
+            {error && <p>Error</p>}
+            Street Address
+            <input
+              className="warehouseadd__input warehouseadd__street"
+              type="text"
+              placeholder="Street Address"
+              value={formData.address}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: e.target.value,
+                })
+              }
+            />
+            City
+            <input
+              className="warehouseadd__input warehouseadd__cityedit"
+              type="text"
+              placeholder="City"
+              value={formData.city}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  city: e.target.value,
+                })
+              }
+            />
+            Country
+            <input
+              className="warehouseadd__input warehouseadd__country"
+              type="text"
+              placeholder="Country"
+              value={formData.country}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  country: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className="warehouseadd__contacts">
+            <h2 className="warehouseadd__contacts-header">Contact Details</h2>
+            Contact Name
+            <input
+              className="warehouseadd__input warehouseadd__name"
+              type="text"
+              placeholder="Contact Name"
+              value={formData.contact_name}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  contact_name: e.target.value,
+                })
+              }
+            />
+            Position
+            <input
+              className="warehouseadd__input warehouseadd__position"
+              type="text"
+              placeholder="Position"
+              value={formData.contact_position}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  contact_position: e.target.value,
+                })
+              }
+            />
+            Phone Number
+            <input
+              className="warehouseadd__input warehouseadd__phone"
+              type="text"
+              placeholder="Phone Number"
+              value={formData.contact_phone}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  contact_phone: e.target.value,
+                })
+              }
+            />
+            Email
+            <input
+              className="warehouseadd__input warehouseadd__email"
+              type="text"
+              placeholder="Email"
+              value={formData.contact_email}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  contact_email: e.target.value,
+                })
+              }
+            />
+          </div>
         </div>
-        <div className="warehouseedit__contacts">
-          <h2 className="warehouseedit__contacts-header">Contact Details</h2>
-          Contact Name
-          <input
-            className="warehouseedit__name"
-            type="text"
-            placeholder="Contact Name"
-            value={formData.contact_name}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                contact_name: e.target.value,
-              })
-            }
-          />
-          Position
-          <input
-            className="warehouseedit__position"
-            type="text"
-            placeholder="Position"
-            value={formData.contact_position}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                contact_position: e.target.value,
-              })
-            }
-          />
-          Phone Number
-          <input
-            className="warehouseedit__phone"
-            type="text"
-            placeholder="Phone Number"
-            value={formData.contact_phone}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                contact_phone: e.target.value,
-              })
-            }
-          />
-          Email
-          <input
-            className="warehouseedit__email"
-            type="text"
-            placeholder="Email"
-            value={formData.contact_email}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                contact_email: e.target.value,
-              })
-            }
-          />
-        </div>
-        <div className="warehouseedit__button-container">
+        <div className="warehouseadd__button-container">
+          <Link to={'/'}>
+            <button
+              className="warehouseadd__button warehouseadd__button-cancel"
+              type="button"
+            >
+              Cancel
+            </button>
+          </Link>
           <button
-            className="warehouseedit__button warehouseedit__button-cancel"
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-            className="warehouseedit__button warehouseedit__button-save"
+            className="warehouseadd__button warehouseadd__button-add"
             type="submit"
           >
             + Add Warehouse
