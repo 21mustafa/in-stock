@@ -21,7 +21,9 @@ function WarehouseList(props) {
           />
           <img src={searchIcon} className="search-icon" alt="search icon" />
         </div>
-        <button className="warehouse__add-button">+Add New Warehouse</button>
+        <Link to={`/add`}>
+          <button className="warehouse__add-button">+Add New Warehouse</button>
+        </Link>
       </div>
       <ul className="warehouse__list">
         {props.warehouseList.map((warehouse) => {
@@ -61,7 +63,9 @@ function WarehouseList(props) {
               </div>
               <div className="icon-container">
                 <img className="icons" src={deleteIcon} alt="delete icon" />
-                <img className="icons" src={editIcon} alt="edit icon" />
+                <Link to={`/edit/${warehouse.id}`}>
+                  <img className="icons" src={editIcon} alt="edit icon" />
+                </Link>
               </div>
             </li>
           );

@@ -1,0 +1,34 @@
+@use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
+
+@mixin tag {
+    @include list-item-value;
+    @include p3;
+    text-transform: uppercase;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+    width: fit-content;
+}
+
+@mixin tag-success {
+    @include tag;
+    background-color: rgb(21 132 99 / 7%);
+    color: $supporting-colors-1;
+}
+
+@mixin tag-fail {
+    @include tag;
+    background-color: rgb(201 69 21 / 7%);
+    color: $supporting-colors-2;
+}
+
+.tag--success {
+    @include tag-success;
+}
+
+.tag--fail {
+    @include tag-fail;
+}
