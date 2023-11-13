@@ -1,0 +1,16 @@
+@use '../../styles/partials/mixin' as *;
+@use '../../styles/partials/variables' as *;
+
+.required-error {
+  display: flex;
+  margin-top: -1.5rem;
+  color: $supporting-colors-2;
+  align-items: center;
+  @include p2;
+  font-weight: 400;
+
+  &__icon {
+    width: 20px;
+    margin-right: 1rem;
+  }
+}

@@ -28,6 +28,7 @@
     border: 1px solid $secondary-colors-2;
     transition: border-color 0.3s ease;
     padding: 0 16px;
+    @include form-field;
 
     &:focus {
       border-color: $primary-colors-2;

@@ -3,8 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
+import requiredError from '../../components/FormfieldError/Error';
 import back from '../../assets/icons/arrow_back-24px.svg';
-// import add from "../../assets/icons/add_white_24dp.svg";
 
 const validator = require('validator');
 
@@ -19,7 +19,18 @@ function isValidPhoneNumber(phoneNumber) {
 
 function WarehouseAdd() {
   const navigate = useNavigate();
-  const [error, setError] = useState(true);
+
+  const [error, setError] = useState({
+    warehouse_name: false,
+    address: false,
+    city: false,
+    country: false,
+    contact_name: false,
+    contact_position: false,
+    contact_phone: false,
+    contact_email: false,
+  });
+
   const [formData, setFormData] = useState({
     warehouse_name: '',
     address: '',
@@ -35,17 +46,20 @@ function WarehouseAdd() {
     event.preventDefault();
 
     try {
-      if (
-        !formData.warehouse_name ||
-        !formData.address ||
-        !formData.city ||
-        !formData.country ||
-        !formData.contact_name ||
-        !formData.contact_position ||
-        !formData.contact_phone ||
-        !formData.contact_email
-      ) {
-        alert('Please fill in all fields.');
+      const fieldErrors = {
+        warehouse_name: !formData.warehouse_name,
+        address: !formData.address,
+        city: !formData.city,
+        country: !formData.country,
+        contact_name: !formData.contact_name,
+        contact_position: !formData.contact_position,
+        contact_phone: !formData.contact_phone,
+        contact_email: !formData.contact_email,
+      };
+
+      setError(fieldErrors);
+
+      if (Object.values(fieldErrors).some((fieldError) => fieldError)) {
         return;
       }
 
@@ -85,117 +99,182 @@ function WarehouseAdd() {
             Warehouse Name
             <input
               className={
-                error
-                  ? 'warehouseadd__input warehouseadd__name warehouseadd__name--error'
-                  : 'warehouseadd__name '
+                error.warehouse_name
+                  ? 'warehouseadd__input warehouseadd__name warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__name '
               }
               type="text"
               placeholder="Warehouse Name"
               value={formData.warehouse_name}
               onChange={(e) => {
-                e.target.value !== '' ? setError(false) : setError(true);
-
+                setError({
+                  ...error,
+                  warehouse_name: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   warehouse_name: e.target.value,
                 });
               }}
             />
-            {error && <p>Error</p>}
+            {error.warehouse_name && requiredError()}
             Street Address
             <input
-              className="warehouseadd__input warehouseadd__street"
+              className={
+                error.address
+                  ? 'warehouseadd__input warehouseadd__street warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__street '
+              }
               type="text"
               placeholder="Street Address"
               value={formData.address}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  address: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   address: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.address && requiredError()}
             City
             <input
-              className="warehouseadd__input warehouseadd__cityedit"
+              className={
+                error.city
+                  ? 'warehouseadd__input warehouseadd__cityedit warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__cityedit '
+              }
               type="text"
               placeholder="City"
               value={formData.city}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  city: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   city: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.city && requiredError()}
             Country
             <input
-              className="warehouseadd__input warehouseadd__country"
+              className={
+                error.country
+                  ? 'warehouseadd__input warehouseadd__country warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__country '
+              }
               type="text"
               placeholder="Country"
               value={formData.country}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  country: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   country: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.country && requiredError()}
           </div>
           <div className="warehouseadd__contacts">
             <h2 className="warehouseadd__contacts-header">Contact Details</h2>
             Contact Name
             <input
-              className="warehouseadd__input warehouseadd__name"
+              className={
+                error.contact_name
+                  ? 'warehouseadd__input warehouseadd__name warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__name '
+              }
               type="text"
               placeholder="Contact Name"
               value={formData.contact_name}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  contact_name: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   contact_name: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.contact_name && requiredError()}
             Position
             <input
-              className="warehouseadd__input warehouseadd__position"
+              className={
+                error.contact_position
+                  ? 'warehouseadd__input warehouseadd__position warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__position '
+              }
               type="text"
               placeholder="Position"
               value={formData.contact_position}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  contact_position: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   contact_position: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.contact_position && requiredError()}
             Phone Number
             <input
-              className="warehouseadd__input warehouseadd__phone"
+              className={
+                error.contact_phone
+                  ? 'warehouseadd__input warehouseadd__phone warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__phone '
+              }
               type="text"
               placeholder="Phone Number"
               value={formData.contact_phone}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  contact_phone: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   contact_phone: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.contact_phone && requiredError()}
             Email
             <input
-              className="warehouseadd__input warehouseadd__email"
+              className={
+                error.contact_email
+                  ? 'warehouseadd__input warehouseadd__email warehouseadd__input--error'
+                  : 'warehouseadd__input warehouseadd__email '
+              }
               type="text"
               placeholder="Email"
               value={formData.contact_email}
-              onChange={(e) =>
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  contact_email: e.target.value === '',
+                });
                 setFormData({
                   ...formData,
                   contact_email: e.target.value,
-                })
-              }
+                });
+              }}
             />
+            {error.contact_email && requiredError()}
           </div>
         </div>
         <div className="warehouseadd__button-container">
