@@ -11,20 +11,22 @@
 }
 
 .searchbar-container {
-  padding-bottom: 2rem;
   @include tablet {
-    width: 40%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 }
 
 .warehouse {
   display: flex;
   flex-direction: column;
-  padding: 2rem 40px 2rem;
+  padding: 24px 16px;
   border-bottom: 1px solid #bdc5d5;
   @include tablet {
     flex-direction: row;
     justify-content: space-between;
+    padding: 32px 32px 16px;
   }
 
   &__add-button {
@@ -33,24 +35,30 @@
     height: 36px;
     border-radius: 20px;
     border: none;
+    width: 100%;
     @include tablet {
-      width: 22%;
+      width: 16rem;
     }
   }
   &__list {
     display: flex;
     flex-direction: column;
     @include tablet {
-      display: none;
+    }
+    @include desktop {
+      font-size: 14px;
     }
   }
   &__list-row {
     display: none;
     @include tablet {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
       list-style-type: none;
       background-color: #f7f8f9b2;
+      padding: 0 32px;
+      height: 4rem;
+      font-size: 12px;
     }
   }
 
@@ -60,6 +68,12 @@
     border-bottom: 1px solid grey;
     padding-top: 16px;
     padding-bottom: 24px;
+    @include tablet {
+      flex-direction: row;
+      padding-left: 32px;
+      padding-right: 32px;
+      justify-content: space-between;
+    }
   }
   &__label {
     font-weight: 600;
@@ -68,8 +82,42 @@
     @include tablet {
       display: flex;
       align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &-container1 {
+      @include tablet {
+        display: flex;
+        width: 55%;
+        justify-content: space-between;
+      }
+      @include desktop {
+        width: 59%;
+      }
+    }
+
+    &-container2 {
+      @include tablet {
+        display: flex;
+        justify-content: space-between;
+        width: 40%;
+      }
+      @include desktop {
+        width: 30%;
+      }
+    }
+
+    &-mobile {
+      font-weight: 600;
+      color: #5c667e;
+      line-height: 2rem;
+      @include tablet {
+        display: none;
+      }
     }
   }
+
   &__city {
     color: #2e66e5;
     font-weight: 600;
@@ -84,6 +132,36 @@
     padding-bottom: 2rem;
     @include tablet {
       width: 25%;
+      font-size: 28px;
+    }
+  }
+
+  &__sort-icon {
+    @include tablet {
+      height: 16px;
+      padding-left: 4px;
+    }
+  }
+
+  &__span {
+    @include tablet {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__description-container {
+    @include tablet {
+      width: 50%;
+    }
+  }
+
+  &__address {
+    @include tablet {
+      width: 50%;
+    }
+    @include desktop {
+      width: 100%;
     }
   }
 }
@@ -93,35 +171,59 @@
   width: 24px;
   position: absolute;
   right: 14%;
-  top: 4.5%;
+  top: 5%;
   @include tablet {
-    right: 33%;
-    top: 20.7%;
+    right: 30%;
+    top: 6%;
   }
 }
 
 .parent-container {
   display: flex;
   justify-content: space-between;
-  padding: 0 40px;
-  width: 100%;
+  padding: 0 16px;
+  width: 85%;
+  @include tablet {
+    padding: 0;
+  }
 }
 
 .flexbox1 {
   display: flex;
   flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+    width: 45%;
+    justify-content: space-between;
+  }
+  @include desktop {
+    width: 50%;
+  }
 }
 
-// .flexbox2 {
-//     padding-left: 40px;
-// }
-// .icons {
-//   height: 24px;
-//   width: 24px;
-// }
+.flexbox2 {
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+  @include desktop {
+    width: 47%;
+  }
+}
+.icons {
+  @include tablet {
+    padding-right: 16px;
+  }
+}
 
 .icon-container {
   display: flex;
   justify-content: space-between;
-  padding: 16px 40px 0;
+  padding: 16px 16px 0;
+  @include tablet {
+    padding: 0;
+    align-items: center;
+    width: 9%;
+  }
 }
