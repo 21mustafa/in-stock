@@ -6,14 +6,14 @@ import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function WarehouseDetails() {
   const inStock = "In Stock";
   const params = useParams();
-
+  const navigate = useNavigate();
   const [warehouseDetails, setWarehouseDetails] = useState({});
   const [inventoryDetails, setInventoryDetails] = useState([]);
 
@@ -33,6 +33,9 @@ function WarehouseDetails() {
       });
   }, [params.id]);
 
+  const handleEditWarehouseClick = () => {
+    navigate(`/edit`);
+  };
   {
     return (
       <>
@@ -45,16 +48,10 @@ function WarehouseDetails() {
               {warehouseDetails.warehouse_name}
             </h1>
           </div>
-          <Link to="/edit/:id">
-            <button className="edit-button">
-              <img
-                className="edit-button__img"
-                src={editIcon}
-                alt="edit icon"
-              />
-              <span className="edit-button__text">Edit</span>
-            </button>
-          </Link>
+          <button onClick={handleEditWarehouseClick} className="edit-button">
+            <img className="edit-button__img" src={editIcon} alt="edit icon" />
+            <span className="edit-button__text">Edit</span>
+          </button>
         </div>
         <ul className="warehouse-info__list">
           <li className="warehouse-info__list-item">
