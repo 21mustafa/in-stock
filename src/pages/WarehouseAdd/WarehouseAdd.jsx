@@ -1,10 +1,10 @@
-import './WarehouseAdd.scss';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
 import axios from 'axios';
 
 import requiredError from '../../components/FormfieldError/Error';
 import back from '../../assets/icons/arrow_back-24px.svg';
+import './WarehouseAdd.scss';
 
 const validator = require('validator');
 
@@ -41,6 +41,17 @@ function WarehouseAdd() {
     contact_phone: '',
     contact_email: '',
   });
+
+  const handleInputChange = (field, value) => {
+    setError((prevError) => ({
+      ...prevError,
+      [field]: value === '',
+    }));
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [field]: value,
+    }));
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -106,16 +117,9 @@ function WarehouseAdd() {
               type="text"
               placeholder="Warehouse Name"
               value={formData.warehouse_name}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  warehouse_name: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  warehouse_name: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('warehouse_name', e.target.value)
+              }
             />
             {error.warehouse_name && requiredError()}
             Street Address
@@ -128,16 +132,7 @@ function WarehouseAdd() {
               type="text"
               placeholder="Street Address"
               value={formData.address}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  address: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  address: e.target.value,
-                });
-              }}
+              onChange={(e) => handleInputChange('address', e.target.value)}
             />
             {error.address && requiredError()}
             City
@@ -150,16 +145,7 @@ function WarehouseAdd() {
               type="text"
               placeholder="City"
               value={formData.city}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  city: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  city: e.target.value,
-                });
-              }}
+              onChange={(e) => handleInputChange('city', e.target.value)}
             />
             {error.city && requiredError()}
             Country
@@ -172,16 +158,7 @@ function WarehouseAdd() {
               type="text"
               placeholder="Country"
               value={formData.country}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  country: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  country: e.target.value,
-                });
-              }}
+              onChange={(e) => handleInputChange('country', e.target.value)}
             />
             {error.country && requiredError()}
           </div>
@@ -197,16 +174,9 @@ function WarehouseAdd() {
               type="text"
               placeholder="Contact Name"
               value={formData.contact_name}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_name: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_name: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_name', e.target.value)
+              }
             />
             {error.contact_name && requiredError()}
             Position
@@ -219,16 +189,9 @@ function WarehouseAdd() {
               type="text"
               placeholder="Position"
               value={formData.contact_position}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_position: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_position: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_position', e.target.value)
+              }
             />
             {error.contact_position && requiredError()}
             Phone Number
@@ -241,16 +204,9 @@ function WarehouseAdd() {
               type="text"
               placeholder="Phone Number"
               value={formData.contact_phone}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_phone: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_phone: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_phone', e.target.value)
+              }
             />
             {error.contact_phone && requiredError()}
             Email
@@ -263,16 +219,9 @@ function WarehouseAdd() {
               type="text"
               placeholder="Email"
               value={formData.contact_email}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_email: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_email: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_email', e.target.value)
+              }
             />
             {error.contact_email && requiredError()}
           </div>

@@ -1,10 +1,10 @@
-import './WarehouseEdit.scss';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import requiredError from '../../components/FormfieldError/Error';
 import back from '../../assets/icons/arrow_back-24px.svg';
+import './WarehouseEdit.scss';
 
 const validator = require('validator');
 
@@ -32,7 +32,7 @@ function WarehouseEdit() {
     contact_email: false,
   });
 
-  const [formData, setFormData] = useState({
+  const [_formData, setFormData] = useState({
     warehouse_name: '',
     address: '',
     city: '',
@@ -54,16 +54,33 @@ function WarehouseEdit() {
     contact_email: '',
   });
 
-  // need to add a try/catch below
+  const handleInputChange = (field, value) => {
+    setError((prevError) => ({
+      ...prevError,
+      [field]: value === '',
+    }));
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [field]: value,
+    }));
+    setSelectedWarehouse((prevWarehouse) => ({
+      ...prevWarehouse,
+      [field]: value,
+    }));
+  };
 
   useEffect(() => {
-    const getSelectedWarehouse = async () => {
-      const response = await axios.get(
-        `http://localhost:8080/warehouses/${params.id}`
-      );
-      setSelectedWarehouse(response.data);
-    };
-    getSelectedWarehouse();
+    try {
+      const getSelectedWarehouse = async () => {
+        const response = await axios.get(
+          `http://localhost:8080/warehouses/${params.id}`
+        );
+        setSelectedWarehouse(response.data);
+      };
+      getSelectedWarehouse();
+    } catch (err) {
+      console.log('Error fetching warehouse data:', err);
+    }
   }, [params.id]);
 
   const handleFormSubmit = async (event) => {
@@ -138,45 +155,21 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.warehouse_name}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  warehouse_name: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  warehouse_name: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  warehouse_name: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('warehouse_name', e.target.value)
+              }
             />
             {error.warehouse_name && requiredError()}
             Street Address
             <input
               className={
-                error.warehouse_address
+                error.address
                   ? 'warehouseedit__input warehouseedit__address warehouseedit__input--error'
                   : 'warehouseedit__input warehouseedit__address '
               }
               type="text"
               value={selectedWarehouse.address}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  address: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  address: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  address: e.target.value,
-                });
-              }}
+              onChange={(e) => handleInputChange('address', e.target.value)}
             />
             {error.address && requiredError()}
             City
@@ -188,20 +181,7 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.city}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  city: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  city: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  city: e.target.value,
-                });
-              }}
+              onChange={(e) => handleInputChange('city', e.target.value)}
             />
             {error.city && requiredError()}
             Country
@@ -213,20 +193,7 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.country}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  country: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  country: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  country: e.target.value,
-                });
-              }}
+              onChange={(e) => handleInputChange('country', e.target.value)}
             />
             {error.country && requiredError()}
           </div>
@@ -241,20 +208,9 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.contact_name}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_name: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_name: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  contact_name: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_name', e.target.value)
+              }
             />
             {error.contact_name && requiredError()}
             Position
@@ -266,20 +222,9 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.contact_position}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_position: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_position: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  contact_position: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_position', e.target.value)
+              }
             />
             {error.contact_position && requiredError()}
             Phone Number
@@ -291,20 +236,9 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.contact_phone}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_phone: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_phone: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  contact_phone: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_phone', e.target.value)
+              }
             />
             {error.contact_phone && requiredError()}
             Email
@@ -316,20 +250,9 @@ function WarehouseEdit() {
               }
               type="text"
               value={selectedWarehouse.contact_email}
-              onChange={(e) => {
-                setError({
-                  ...error,
-                  contact_email: e.target.value === '',
-                });
-                setFormData({
-                  ...formData,
-                  contact_email: e.target.value,
-                });
-                setSelectedWarehouse({
-                  ...selectedWarehouse,
-                  contact_email: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                handleInputChange('contact_email', e.target.value)
+              }
             />
             {error.contact_email && requiredError()}
           </div>
