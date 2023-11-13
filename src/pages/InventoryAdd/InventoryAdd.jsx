@@ -7,7 +7,7 @@ import axios from "axios";
 import back from "../../assets/icons/arrow_back-24px.svg";
 import add from "../../assets/icons/add_white_24dp.svg";
 
-function InventoryAdd(props) {
+function InventoryAdd() {
   const params = useParams();
 
   const [selectedInventory, setSelectedInventory] = useState({
@@ -20,7 +20,14 @@ function InventoryAdd(props) {
   });
   const [warehouseList, setWarehouseList] = useState([]);
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({
+    warehouse_id: false,
+    item_name: false,
+    description: false,
+    category: false,
+    status: false,
+    quantity: false,
+  });
 
   const categories = [
     "Accessories",
