@@ -73,8 +73,9 @@ function App() {
               />
               <Route
                 path="/details/:id"
-                element={<WarehouseDetails />}
-                refreshInventory={refreshInventory}
+                element={
+                  <WarehouseDetails refreshInventory={refreshInventory} />
+                }
               />
               <Route path="/edit/:id" element={<WarehouseEdit />} />
               <Route path="/add" element={<WarehouseAdd />} />
