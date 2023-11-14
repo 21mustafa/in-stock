@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./InventoryEdit.scss";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import requiredError from "../../components/FormfieldError/Error";
 
 //images
 import back from "../../assets/icons/arrow_back-24px.svg";
@@ -18,8 +19,16 @@ function InventoryEdit(props) {
     status: "",
     quantity: "",
   });
-
   const [warehouseList, setWarehouseList] = useState([]);
+
+  const [error, setError] = useState({
+    warehouse_id: false,
+    item_name: false,
+    description: false,
+    category: false,
+    status: false,
+    quantity: false,
+  });
 
   const categories = [
     "Accessories",
@@ -66,26 +75,44 @@ function InventoryEdit(props) {
     });
   };
   //
+  const handleInputChange = (field, value) => {
+    setError((prevError) => ({
+      ...prevError,
+      [field]: value === "",
+    }));
+    setSelectedInventory((prevSelectedInventory) => ({
+      ...prevSelectedInventory,
+      [field]: value,
+    }));
+  };
 
   const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(selectedInventory.warehouse_id);
+    // console.log(selectedInventory.warehouse_id);
     try {
-      const response = await axios.put(
-        `http://localhost:8080/inventories/${params.id}`,
-        {
-          warehouse_id: selectedInventory.warehouse_id,
-          item_name: selectedInventory.item_name,
-          description: selectedInventory.description,
-          category: selectedInventory.category,
-          status: selectedInventory.status,
-          quantity: selectedInventory.quantity,
-        }
-      );
+      const fieldErrors = {
+        warehouse_id: !selectedInventory.warehouse_id,
+        item_name: !selectedInventory.item_name,
+        description: !selectedInventory.description,
+        category: !selectedInventory.category,
+        status: !selectedInventory.status,
+        quantity: !selectedInventory.quantity,
+      };
+      setError(fieldErrors);
+
+      await axios.put(`http://localhost:8080/inventories/${params.id}`, {
+        warehouse_id: selectedInventory.warehouse_id,
+        item_name: selectedInventory.item_name,
+        description: selectedInventory.description,
+        category: selectedInventory.category,
+        status: selectedInventory.status,
+        quantity: selectedInventory.quantity,
+      });
       navigate("/inventory/list");
     } catch (err) {
       console.log("form not submitted", err);
+      alert("Please fill out all the information");
     }
   };
 
@@ -108,36 +135,36 @@ function InventoryEdit(props) {
             <div className="inventoryEditForm__name">
               <label className="inventoryEdit__h3">Item Name</label>
               <input
-                className="editInput-name"
+                className={
+                  error.item_name
+                    ? "editInput-name input--error"
+                    : "editInput-name"
+                }
                 type="text"
                 name="item-name"
                 value={selectedInventory.item_name}
-                onChange={(e) =>
-                  setSelectedInventory({
-                    ...selectedInventory,
-                    item_name: e.target.value,
-                  })
-                }
-                required
+                onChange={(e) => handleInputChange("item_name", e.target.value)}
               />
+              {error.item_name && requiredError()}
             </div>
 
             <div className="inventoryEditForm__description">
               <label className="inventoryEdit__h3">Description</label>
               <textarea
-                className="editInput-description"
+                className={
+                  error.description
+                    ? "editInput-description input--error"
+                    : "editInput-description"
+                }
                 name="item-description"
                 cols="30"
                 rows="10"
                 value={selectedInventory.description}
                 onChange={(e) =>
-                  setSelectedInventory({
-                    ...selectedInventory,
-                    description: e.target.value,
-                  })
+                  handleInputChange("description", e.target.value)
                 }
-                required
-              ></textarea>
+              />
+              {error.description && requiredError()}
             </div>
 
             <div className="inventoryEditForm__category">
@@ -207,17 +234,17 @@ function InventoryEdit(props) {
             <div className="inventoryEditForm__quantity">
               <label className="inventoryEdit__h3">Quantity</label>
               <input
-                className="editInput-quantity"
+                className={
+                  error.quantity
+                    ? "editInput-quantity input--error"
+                    : "editInput-quantity"
+                }
                 type="text"
                 name="item-quantity"
                 value={selectedInventory.quantity}
-                onChange={(e) =>
-                  setSelectedInventory({
-                    ...selectedInventory,
-                    quantity: e.target.value,
-                  })
-                }
+                onChange={(e) => handleInputChange("quantity", e.target.value)}
               />
+              {error.quantity && requiredError()}
             </div>
 
             <div className="inventoryEditForm__warehouse">

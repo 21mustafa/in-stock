@@ -138,6 +138,7 @@
 }
 
 .input {
+  @include form-field;
   &-name,
   &-quantity {
     height: 36px;

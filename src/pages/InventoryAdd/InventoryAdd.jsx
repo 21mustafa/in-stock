@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./InventoryAdd.scss";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import requiredError from "../../components/FormfieldError/Error";
 
 //images
 import back from "../../assets/icons/arrow_back-24px.svg";
 import add from "../../assets/icons/add_white_24dp.svg";
 
 function InventoryAdd() {
-  const params = useParams();
+  // const params = useParams();
+  // console.log(params);
 
   const [selectedInventory, setSelectedInventory] = useState({
     warehouse_id: "",
@@ -16,7 +18,7 @@ function InventoryAdd() {
     description: "",
     category: "",
     status: "",
-    quantity: "0",
+    quantity: "",
   });
   const [warehouseList, setWarehouseList] = useState([]);
 
@@ -61,12 +63,33 @@ function InventoryAdd() {
   };
   //
 
+  const handleInputChange = (field, value) => {
+    setError((prevError) => ({
+      ...prevError,
+      [field]: value === "",
+    }));
+    setSelectedInventory((prevSelectedInventory) => ({
+      ...prevSelectedInventory,
+      [field]: value,
+    }));
+  };
+
   const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(selectedInventory.warehouse_id);
+    // console.log(selectedInventory.warehouse_id);
     try {
-      const response = await axios.post(`http://localhost:8080/inventories`, {
+      const fieldErrors = {
+        warehouse_id: !selectedInventory.warehouse_id,
+        item_name: !selectedInventory.item_name,
+        description: !selectedInventory.description,
+        category: !selectedInventory.category,
+        status: !selectedInventory.status,
+        quantity: !selectedInventory.quantity,
+      };
+      setError(fieldErrors);
+
+      await axios.post(`http://localhost:8080/inventories`, {
         warehouse_id: selectedInventory.warehouse_id,
         item_name: selectedInventory.item_name,
         description: selectedInventory.description,
@@ -100,38 +123,36 @@ function InventoryAdd() {
             <div className="inventoryAddForm__name">
               <label className="inventoryAdd__h3">Item Name</label>
               <input
-                className="input-name"
+                className={
+                  error.item_name ? "input-name input--error" : "input-name"
+                }
                 type="text"
                 name="item-name"
                 placeholder="Item Name"
                 value={selectedInventory.item_name}
-                onChange={(e) =>
-                  setSelectedInventory({
-                    ...selectedInventory,
-                    item_name: e.target.value,
-                  })
-                }
-                required
+                onChange={(e) => handleInputChange("item_name", e.target.value)}
               />
+              {error.item_name && requiredError()}
             </div>
 
             <div className="inventoryAddForm__description">
               <label className="inventoryAdd__h3">Description</label>
               <textarea
-                className="input-description"
+                className={
+                  error.description
+                    ? "input-description input--error"
+                    : "input-description"
+                }
                 name="item-description"
                 cols="30"
                 rows="10"
                 placeholder="Please enter a brief item description..."
                 value={selectedInventory.description}
                 onChange={(e) =>
-                  setSelectedInventory({
-                    ...selectedInventory,
-                    description: e.target.value,
-                  })
+                  handleInputChange("description", e.target.value)
                 }
-                required
-              ></textarea>
+              />
+              {error.description && requiredError()}
             </div>
 
             <div className="inventoryAddForm__category">
@@ -146,9 +167,6 @@ function InventoryAdd() {
                   })
                 }
               >
-                {/* <option value="" disabled selected>
-                  Please select
-                </option> */}
                 {categories.map((category, index) => (
                   <option
                     key={index}
@@ -204,18 +222,18 @@ function InventoryAdd() {
             <div className="inventoryAddForm__quantity">
               <label className="inventoryAdd__h3">Quantity</label>
               <input
-                className="input-quantity"
+                className={
+                  error.quantity
+                    ? "input-quantity input--error"
+                    : "input-quantity"
+                }
                 type="text"
                 name="item-quantity"
+                placeholder="0"
                 value={selectedInventory.quantity}
-                onChange={(e) =>
-                  setSelectedInventory({
-                    ...selectedInventory,
-                    quantity: e.target.value,
-                  })
-                }
-                required
+                onChange={(e) => handleInputChange("quantity", e.target.value)}
               />
+              {error.quantity && requiredError()}
             </div>
 
             <div className="inventoryAddForm__warehouse">
@@ -225,9 +243,6 @@ function InventoryAdd() {
                 onChange={handleWarehouseChange}
                 value={selectedInventory.warehouse_id}
               >
-                {/* <option value="" disabled selected>
-                  Please select
-                </option> */}
                 {warehouseList.map((warehouse) => {
                   return (
                     <option key={warehouse.id} value={warehouse.id}>
