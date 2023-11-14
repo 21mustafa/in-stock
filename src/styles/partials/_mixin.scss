@@ -92,3 +92,9 @@ $desktop-width: 1280px;
   color: $primary-colors-1;
   font-weight: 300;
 }
+
+@mixin form-field {
+  &--error {
+    outline: 1px solid red;
+  }
+}
