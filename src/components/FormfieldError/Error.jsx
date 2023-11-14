@@ -1,5 +1,5 @@
-import requiredErrorIcon from "../../assets/icons/error-24px.svg";
-import "./Error.scss";
+import requiredErrorIcon from '../../assets/icons/error-24px.svg';
+import './Error.scss';
 
 const requiredError = () => {
   return (
