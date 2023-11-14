@@ -148,7 +148,7 @@ function WarehouseList(props) {
                 alt="delete icon"
                 onClick={() => openPopup(warehouse)}
               />
-              <Link to={`/edit/${warehouse.id}`}>
+              <Link to={`/edit/${warehouse.id.toString()}`}>
                 <img className="icons" src={editIcon} alt="edit icon" />
               </Link>
             </div>
@@ -158,5 +158,4 @@ function WarehouseList(props) {
     </>
   );
 }
-
 export default WarehouseList;
