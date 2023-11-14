@@ -26,10 +26,7 @@ function App() {
   const getWarehouseList = async () => {
     const response = await axios.get("http://localhost:8080/warehouses");
     setWarehouseList(response.data);
-    console.log(response.data);
-    // console.log("hi:", response.data);
   };
-  // console.log("lala", warehouseList);
 
   useEffect(() => {
     void getInventoryList();
