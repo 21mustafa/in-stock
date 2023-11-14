@@ -1,5 +1,5 @@
-@use '../../styles/partials/mixin' as *;
-@use '../../styles/partials/variables' as *;
+@use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
 
 .search {
   height: 36px;
@@ -8,28 +8,62 @@
   padding-left: 16px;
   width: 100%;
   position: relative;
+  margin-bottom: 1rem;
+  @include tablet {
+    margin-bottom: 0;
+  }
 }
 
 .searchbar-container {
-  padding-bottom: 2rem;
+  @include tablet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .warehouse {
   display: flex;
   flex-direction: column;
-  padding: 2rem 40px 2rem;
+  padding: 24px 16px;
   border-bottom: 1px solid #bdc5d5;
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 32px 32px 16px;
+  }
 
   &__add-button {
     background-color: #2e66e5;
     color: white;
-    height: 40px;
+    height: 36px;
     border-radius: 20px;
     border: none;
+    width: 100%;
+    @include tablet {
+      width: 16rem;
+    }
   }
   &__list {
     display: flex;
     flex-direction: column;
+    @include tablet {
+    }
+    @include desktop {
+      font-size: 14px;
+    }
+  }
+  &__list-row {
+    display: none;
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      list-style-type: none;
+      background-color: #f7f8f9b2;
+      padding: 0 32px;
+      height: 4rem;
+      font-size: 12px;
+    }
   }
 
   &__list-item {
@@ -38,12 +72,56 @@
     border-bottom: 1px solid grey;
     padding-top: 16px;
     padding-bottom: 24px;
+    @include tablet {
+      flex-direction: row;
+      padding-left: 32px;
+      padding-right: 32px;
+      justify-content: space-between;
+    }
   }
   &__label {
     font-weight: 600;
     color: #5c667e;
     line-height: 2rem;
+    @include tablet {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &-container1 {
+      @include tablet {
+        display: flex;
+        width: 55%;
+        justify-content: space-between;
+      }
+      @include desktop {
+        width: 59%;
+      }
+    }
+
+    &-container2 {
+      @include tablet {
+        display: flex;
+        justify-content: space-between;
+        width: 36%;
+      }
+      @include desktop {
+        width: 30%;
+      }
+    }
+
+    &-mobile {
+      font-weight: 600;
+      color: #5c667e;
+      line-height: 2rem;
+      @include tablet {
+        display: none;
+      }
+    }
   }
+
   &__city {
     color: #2e66e5;
     font-weight: 600;
@@ -56,45 +134,103 @@
   }
   &__header {
     padding-bottom: 2rem;
+    @include tablet {
+      width: 25%;
+      font-size: 28px;
+    }
+  }
+
+  &__sort-icon {
+    @include tablet {
+      height: 16px;
+      padding-left: 4px;
+    }
+  }
+
+  &__span {
+    @include tablet {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__description-container {
+    @include tablet {
+      width: 50%;
+    }
+  }
+
+  &__address {
+    @include tablet {
+      width: 50%;
+    }
+    @include desktop {
+      width: 100%;
+    }
   }
 }
 
 .search-icon {
-  height: 24px;
-  width: 24px;
+  // height: 24px;
+  // width: 24px;
   position: absolute;
-  right: 15%;
-  top: 14%;
+  right: 2rem;
+  /* right: 10%; */
+  top: 7.5rem;
+  @include tablet {
+    right: 21rem;
+    top: 4.7rem;
+  }
 }
 
 .parent-container {
   display: flex;
   justify-content: space-between;
-  padding: 0 40px;
-  //   justify-content: space-between;
-  //   align-items: flex-start;
+  padding: 0 16px;
   width: 100%;
-  //   padding-bottom: 2rem;
-  //   border-bottom: 1px solid #bdc5d5;
+  @include tablet {
+    padding: 0;
+  }
 }
 
 .flexbox1 {
   display: flex;
   flex-direction: column;
-  //   width: 40%;
-  //   margin-left: 40px;
+  width: 45%;
+  @include tablet {
+    flex-direction: row;
+    width: 45%;
+    justify-content: space-between;
+  }
+  @include desktop {
+    width: 50%;
+  }
 }
 
-// .flexbox2 {
-//     padding-left: 40px;
-// }
-// .icons {
-//   height: 24px;
-//   width: 24px;
-// }
+.flexbox2 {
+  width: 50%;
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+    width: 58%;
+  }
+  @include desktop {
+    width: 47%;
+  }
+}
+.icons {
+  @include tablet {
+    padding-right: 16px;
+  }
+}
 
 .icon-container {
   display: flex;
   justify-content: space-between;
-  padding: 16px 40px 0;
+  padding: 16px 16px 0;
+  @include tablet {
+    padding: 0;
+    align-items: center;
+    width: 9%;
+  }
 }

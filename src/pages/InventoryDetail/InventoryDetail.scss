@@ -1,2 +1,99 @@
 @use "../../styles/partials/mixin" as *;
 @use "../../styles/partials/variables" as *;
+
+.inventory-detail {
+    &__edit {
+        color: $background-colors-2;
+        background-color: $primary-colors-2;
+        padding: 1rem;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        &-text {
+            display: none;
+            padding: 1rem 1.75rem;
+            border-radius: 20px;
+
+            @include tablet {
+                display: inline;
+                padding: 0;
+            }
+        }
+        @include tablet {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            gap: 1rem;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+        }
+    }
+
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+        border-bottom: 1px solid $secondary-colors-2;
+
+        @include tablet {
+            padding: 3rem 4rem;
+        }
+
+        &-text {
+            @include h2;
+        }
+
+        &-label {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+    }
+
+    &__content {
+        padding: 2rem;
+
+        @include tablet {
+            padding: 3rem 4rem;
+            display: flex;
+        }
+        &-small {
+            display: flex;
+            justify-content: flex-start;
+            gap: 25%;
+        }
+
+        &-left {
+            @include tablet {
+                border-right: 1px solid $secondary-colors-2;
+                width: 50%;
+            }
+        }
+
+        &-right {
+            @include tablet {
+                width: 50%;
+                padding-left: 5rem;
+            }
+        }
+    }
+
+    &__info {
+        margin-bottom: 2rem;
+        &-label {
+            @include p3;
+            color: $secondary-colors-1;
+            padding-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        &-value {
+            @include list-item-value;
+            font-weight: 400;
+        }
+    }
+}

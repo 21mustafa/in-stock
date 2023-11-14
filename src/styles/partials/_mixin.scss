@@ -1,3 +1,5 @@
+@use '../../styles/partials/variables' as *;
+
 $tablet-width: 768px;
 $desktop-width: 1280px;
 @mixin tablet {
@@ -83,6 +85,12 @@ $desktop-width: 1280px;
     font-size: 1.2rem;
     line-height: 1.8rem;
   }
+}
+
+@mixin list-item-value {
+  @include p2;
+  color: $primary-colors-1;
+  font-weight: 300;
 }
 
 @mixin form-field {

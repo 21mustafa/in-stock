@@ -1,1 +1,250 @@
 @use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/variables" as *;
+
+a {
+  text-decoration: none;
+}
+
+.warehouse-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  border-bottom: 1px solid $secondary-colors-2;
+
+  @include tablet {
+    padding: 2rem 3rem;
+  }
+
+  @include desktop {
+    padding: 3rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    padding-left: 8px;
+    @include h1;
+  }
+}
+.warehouse-info__list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem;
+  @include tablet {
+    flex-direction: row;
+    padding: 1rem 3rem;
+  }
+}
+
+.warehouse-info__list-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+  @include tablet {
+    width: 40%;
+  }
+}
+.warehouse-info__list-item2 {
+  display: flex;
+  justify-content: space-between;
+  width: 86%;
+  @include tablet {
+    width: 60%;
+    padding-left: 5rem;
+    border-left: 1px solid $secondary-colors-2;
+  }
+}
+.warehouse-info__flexbox1 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.warehouse-info__flexbox2 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.toolbar {
+  display: none;
+  @include tablet {
+    background-color: $background-colors-2;
+    display: flex;
+    list-style-type: none;
+  }
+  &__container {
+    width: 100%;
+  }
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    @include tablet {
+      padding: 1rem 3rem;
+    }
+  }
+  &__flex1 {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    @include tablet {
+      width: 58%;
+    }
+  }
+  &__flex2 {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: $secondary-colors-1;
+    line-height: 2rem;
+    font-size: 12px;
+  }
+}
+
+.inventory-row__list-instock {
+  width: 61px;
+  height: 24px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(21, 132, 99, 0.07);
+  color: $supporting-colors-1;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.inventory-row__list-outstock {
+  width: 86px;
+  height: 24px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(201, 69, 21, 0.07);
+  color: $supporting-colors-2;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.warehouse__inventory {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid $secondary-colors-2;
+  padding: 1rem 2rem;
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+  }
+}
+.warehouse__inventory-row {
+  display: flex;
+  justify-content: space-between;
+  @include tablet {
+    width: 85%;
+    align-items: center;
+  }
+}
+.inventory-row__container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  @include tablet {
+    justify-content: space-between;
+    align-items: baseline;
+    flex-direction: row;
+    width: 41%;
+  }
+}
+.inventory-row__container--tablet {
+  @include tablet {
+    width: 52%;
+    justify-content: space-evenly;
+  }
+}
+.warehouse__info {
+  font-weight: 600;
+  color: $secondary-colors-1;
+  line-height: 2rem;
+  font-size: 11px;
+  padding-bottom: 4px;
+
+  @include tablet {
+    font-size: 12px;
+  }
+}
+.warehouse__label-item {
+  display: flex;
+  align-items: normal;
+  font-size: 13px;
+
+  @include tablet {
+    font-size: 14px;
+  }
+  &--blue {
+    color: $primary-colors-2;
+    padding-bottom: 20px;
+    font-weight: 600;
+  }
+  &--width {
+    @include tablet {
+      width: 20%;
+    }
+  }
+  &--width2 {
+    @include tablet {
+      width: 40%;
+    }
+    @include desktop {
+      width: 44%;
+    }
+  }
+}
+
+.icon__container {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  @include tablet {
+    width: 9%;
+  }
+  @include desktop {
+    width: 7%;
+  }
+}
+
+.edit-button {
+  background-color: $primary-colors-2;
+  border-radius: 20px;
+  height: 36px;
+  width: 36px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border: none;
+
+  @include tablet {
+    width: 81px;
+    height: 38px;
+  }
+  &__img {
+    filter: brightness(0) invert(1);
+  }
+  &__text {
+    display: none;
+    @include tablet {
+      display: block;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding-left: 4px;
+    }
+  }
+}

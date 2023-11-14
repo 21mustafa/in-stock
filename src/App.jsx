@@ -45,6 +45,12 @@ function App() {
     await getInventoryList();
   };
 
+  const getWarehouse = (id) => {
+    return warehouseList.length > 0
+      ? warehouseList.find((warehouse) => warehouse.id === id).warehouse_name
+      : "";
+  };
+
   return (
     <div className="app">
       <div className="app__background" />
@@ -57,24 +63,27 @@ function App() {
                 path="/"
                 element={<WarehouseList warehouseList={warehouseList} />}
               />
-              <Route path="/details" element={<WarehouseDetails />} />
+              <Route path="/details/:id" element={<WarehouseDetails />} />
               <Route path="/edit/:id" element={<WarehouseEdit />} />
-
               <Route path="/add" element={<WarehouseAdd />} />
-
               <Route
                 path="/inventory/list"
                 element={
                   <InventoryList
                     inventoryList={inventoryList}
-                    warehouseList={warehouseList}
+                    getWarehouse={getWarehouse}
                     refreshInventory={refreshInventory}
                   />
                 }
               />
               <Route
                 path="/inventory/detail/:id"
-                element={<InventoryDetail inventoryList={inventoryList} />}
+                element={
+                  <InventoryDetail
+                    inventoryList={inventoryList}
+                    getWarehouse={getWarehouse}
+                  />
+                }
               />
               <Route
                 path="/inventory/edit/:id"
