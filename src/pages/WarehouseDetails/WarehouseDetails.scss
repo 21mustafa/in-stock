@@ -1,24 +1,23 @@
 @use "../../styles/partials/mixin" as *;
 @use "../../styles/partials/variables" as *;
 
-<<<<<<< Updated upstream
-=======
 a {
   text-decoration: none;
 }
 
->>>>>>> Stashed changes
 .warehouse-details {
   display: flex;
   justify-content: space-between;
   padding: 2rem 2rem;
-<<<<<<< Updated upstream
-  border-bottom: 1px solid #bdc5d5;
-
-  &__header {
-    display: flex;
-=======
   border-bottom: 1px solid $secondary-colors-2;
+
+  @include tablet {
+    padding: 2rem 3rem;
+  }
+
+  @include desktop {
+    padding: 3rem;
+  }
 
   &__header {
     display: flex;
@@ -27,66 +26,49 @@ a {
   &__title {
     padding-left: 8px;
     @include h1;
->>>>>>> Stashed changes
   }
 }
 .warehouse-info__list {
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-<<<<<<< Updated upstream
-  border-bottom: 1px solid #bdc5d5;
-=======
+  padding: 1rem 1rem;
   @include tablet {
     flex-direction: row;
+    padding: 1rem 3rem;
   }
->>>>>>> Stashed changes
 }
 
 .warehouse-info__list-item {
   display: flex;
   flex-direction: column;
   padding-bottom: 3rem;
-<<<<<<< Updated upstream
-=======
   @include tablet {
     width: 40%;
   }
->>>>>>> Stashed changes
 }
 .warehouse-info__list-item2 {
   display: flex;
   justify-content: space-between;
-<<<<<<< Updated upstream
-=======
+  width: 86%;
   @include tablet {
-    width: 50%;
+    width: 60%;
     padding-left: 5rem;
     border-left: 1px solid $secondary-colors-2;
   }
->>>>>>> Stashed changes
 }
 .warehouse-info__flexbox1 {
   display: flex;
   flex-direction: column;
-<<<<<<< Updated upstream
-=======
   width: 50%;
->>>>>>> Stashed changes
 }
 .warehouse-info__flexbox2 {
   display: flex;
   flex-direction: column;
-<<<<<<< Updated upstream
-=======
   width: 50%;
->>>>>>> Stashed changes
 }
 
 .toolbar {
   display: none;
-<<<<<<< Updated upstream
-=======
   @include tablet {
     background-color: $background-colors-2;
     display: flex;
@@ -99,11 +81,17 @@ a {
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem;
+    @include tablet {
+      padding: 1rem 3rem;
+    }
   }
   &__flex1 {
     width: 60%;
     display: flex;
     justify-content: space-between;
+    @include tablet {
+      width: 58%;
+    }
   }
   &__flex2 {
     width: 30%;
@@ -152,7 +140,8 @@ a {
   @include tablet {
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    padding: 1rem 3rem;
   }
 }
 .warehouse__inventory-row {
@@ -160,6 +149,7 @@ a {
   justify-content: space-between;
   @include tablet {
     width: 85%;
+    align-items: center;
   }
 }
 .inventory-row__container {
@@ -183,12 +173,21 @@ a {
   font-weight: 600;
   color: $secondary-colors-1;
   line-height: 2rem;
-  font-size: 12px;
+  font-size: 11px;
+  padding-bottom: 4px;
+
+  @include tablet {
+    font-size: 12px;
+  }
 }
 .warehouse__label-item {
   display: flex;
   align-items: normal;
-  font-size: 14px;
+  font-size: 13px;
+
+  @include tablet {
+    font-size: 14px;
+  }
   &--blue {
     color: $primary-colors-2;
     padding-bottom: 20px;
@@ -201,31 +200,23 @@ a {
   }
   &--width2 {
     @include tablet {
-      width: 8%;
+      width: 40%;
+    }
+    @include desktop {
+      width: 44%;
     }
   }
 }
-// .warehouse__label-item--blue {
-//   color: $primary-colors-2;
-//   padding-bottom: 20px;
-//   font-weight: 600;
-// }
-// .warehouse__label-item--width {
-//   @include tablet {
-//     width: 20%;
-//   }
-// }
-// .warehouse__label-item--width2 {
-//   @include tablet {
-//     width: 8%;
-//   }
-// }
+
 .icon__container {
   padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   @include tablet {
     width: 9%;
+  }
+  @include desktop {
+    width: 7%;
   }
 }
 
@@ -256,5 +247,4 @@ a {
       padding-left: 4px;
     }
   }
->>>>>>> Stashed changes
 }

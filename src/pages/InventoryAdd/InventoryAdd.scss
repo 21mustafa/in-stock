@@ -1,7 +1,7 @@
 @use "../../styles/partials/mixin" as *;
 @use "../../styles/partials/variables" as *;
 
-.inventoryEdit {
+.inventoryAdd {
   width: 100%;
   &__h1 {
     @include h1;
@@ -30,7 +30,7 @@
   }
 }
 
-.inventoryEditForm {
+.inventoryAddForm {
   &-sections {
     @include tablet {
       display: flex;
@@ -80,7 +80,7 @@
   }
 }
 
-.inventoryEditButton {
+.inventoryAddButton {
   color: white;
   height: 36px;
   width: 48%;
@@ -106,19 +106,39 @@
       }
     }
   }
-  &__save {
+  &__add {
     background-color: $primary-colors-2;
+    width: 100%;
     @include tablet {
       padding: 0 16px;
-      margin-left: 16px;
       &:hover {
         background-color: $primary-colors-1;
       }
     }
+    &-label {
+      position: absolute;
+      transform: translate(0%, -50%);
+      left: 8%;
+      top: 50%;
+      line-height: 0;
+      @include tablet {
+        left: 4px;
+      }
+      &-icon {
+        width: 16px;
+      }
+    }
+  }
+  &-btn {
+    position: relative;
+    @include tablet {
+      margin-left: 16px;
+    }
   }
 }
 
-.editInput {
+.input {
+  @include form-field;
   &-name,
   &-quantity {
     height: 36px;

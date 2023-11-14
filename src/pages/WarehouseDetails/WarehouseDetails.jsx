@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./WarehouseDetails.scss";
 import editIcon from "../../assets/icons/edit-24px.svg";
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
@@ -30,6 +31,23 @@ function WarehouseDetails() {
   const [warehouseDetails, setWarehouseDetails] = useState({});
   const [inventoryDetails, setInventoryDetails] = useState([]);
 >>>>>>> Stashed changes
+=======
+import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
+import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
+import sortIcon from "../../assets/icons/sort-24px.svg";
+import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+function WarehouseDetails() {
+  const inStock = "In Stock";
+  const params = useParams();
+  const navigate = useNavigate();
+  const [warehouseDetails, setWarehouseDetails] = useState({});
+  const [inventoryDetails, setInventoryDetails] = useState([]);
+>>>>>>> main
 
   useEffect(() => {
     axios
@@ -38,6 +56,7 @@ function WarehouseDetails() {
         setWarehouseDetails(response.data);
         // console.log(response.data);
       });
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   }, [params.id]);
 
@@ -47,16 +66,22 @@ function WarehouseDetails() {
       .then((response) => {
         setInventoryDetails(response.dat);
 =======
+=======
+>>>>>>> main
 
     axios
       .get(`http://localhost:8080/warehouses/${params.id}/inventories`)
       .then((response) => {
         setInventoryDetails(response.data);
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
         // console.log(response.data);
       });
   }, [params.id]);
 
+<<<<<<< HEAD
   {
 <<<<<<< Updated upstream
     // props.warehouseDetails.map((warehouse) => {
@@ -64,10 +89,17 @@ function WarehouseDetails() {
     // console.log("hello:", props.warehouseList[0]);
 =======
 >>>>>>> Stashed changes
+=======
+  const handleEditWarehouseClick = () => {
+    navigate(`/edit`);
+  };
+  {
+>>>>>>> main
     return (
       <>
         <div className="warehouse-details">
           <div className="warehouse-details__header">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             <img className="arrowback-icon" src={arrowBackIcon} />
 =======
@@ -75,10 +107,16 @@ function WarehouseDetails() {
               <img className="arrowback-icon" src={arrowBackIcon} />
             </Link>
 >>>>>>> Stashed changes
+=======
+            <Link to="/">
+              <img className="arrowback-icon" src={arrowBackIcon} />
+            </Link>
+>>>>>>> main
             <h1 className="warehouse-details__title">
               {warehouseDetails.warehouse_name}
             </h1>
           </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
           <div className="edit-icon">
             <img className="edit-icon__img" src={editIcon} alt="edit icon" />
@@ -99,37 +137,55 @@ function WarehouseDetails() {
               <span className="edit-button__text">Edit</span>
             </button>
           </Link>
+=======
+          <button onClick={handleEditWarehouseClick} className="edit-button">
+            <img className="edit-button__img" src={editIcon} alt="edit icon" />
+            <span className="edit-button__text">Edit</span>
+          </button>
+>>>>>>> main
         </div>
         <ul className="warehouse-info__list">
           <li className="warehouse-info__list-item">
             <span className="warehouse__info">WAREHOUSE ADDRESS</span>
             <span className="warehouse__label-item">
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
               {warehouseDetails.address},{warehouseDetails.city},
               {warehouseDetails.country}
             </span>
           </li>
           <li className="warehouse-info__list-item2">
             <div className="warehouse-info__flexbox1">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
               <span className="warehouse__label">CONTACT NAME</span>
               <span>{warehouseDetails.contact_name}</span>
 =======
+=======
+>>>>>>> main
               <span className="warehouse__info">CONTACT NAME</span>
               <span className="warehouse__label-item">
                 {warehouseDetails.contact_name}
               </span>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
               <span className="warehouse__label-item">
                 {warehouseDetails.contact_position}
               </span>
             </div>
             <div className="warehouse-info__flexbox2">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
               <span className="warehouse__label">CONTACT INFORMATION</span>
               <span>{warehouseDetails.contact_phone}</span>
               <span>{warehouseDetails.contact_email}</span>
 =======
+=======
+>>>>>>> main
               <span className="warehouse__info">CONTACT INFORMATION</span>
               <span className="warehouse__label-item">
                 {warehouseDetails.contact_phone}
@@ -137,12 +193,16 @@ function WarehouseDetails() {
               <span className="warehouse__label-item">
                 {warehouseDetails.contact_email}
               </span>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
             </div>
           </li>
         </ul>
         <ul className="toolbar">
           <li className="toolbar__container">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             <div className="toolbar__box1">
               <span className="toolbar__item">
@@ -187,6 +247,8 @@ function WarehouseDetails() {
     );
     // });
 =======
+=======
+>>>>>>> main
             <div className="toolbar__box">
               <div className="toolbar__flex1">
                 <span className="toolbar__item">
@@ -218,24 +280,39 @@ function WarehouseDetails() {
               <li key={index} className="warehouse__inventory">
                 <div className="warehouse__inventory-row">
                   <div className="inventory-row__container">
+<<<<<<< HEAD
                     <span className="warehouse__label">INVENTORY ITEM</span>
+=======
+                    <span className="warehouse__label-mobile">
+                      INVENTORY ITEM
+                    </span>
+>>>>>>> main
                     <Link to="/inventory/detail/:id">
                       <span className="warehouse__label-item warehouse__label-item--blue">
                         {inventory.item_name}
                         <img src={chevronIcon} alt="chevron icon"></img>
                       </span>
                     </Link>
+<<<<<<< HEAD
                     <span className="warehouse__label warehouse__label--tablet">
                       CATEGORY
                     </span>
+=======
+                    <span className="warehouse__label-mobile">CATEGORY</span>
+>>>>>>> main
                     <span className="warehouse__label-item warehouse__label-item--width">
                       {inventory.category}
                     </span>
                   </div>
+<<<<<<< HEAD
                   <div className="inventory-row__container inventory-row__container--tablet">
                     <span className="warehouse__label warehouse__label--tablet">
                       STATUS
                     </span>
+=======
+                  <div className="inventory-row__container inventory-row__container--table">
+                    <span className="warehouse__label-mobile">STATUS</span>
+>>>>>>> main
                     <button
                       className={`${
                         inventory.status === inStock
@@ -245,7 +322,11 @@ function WarehouseDetails() {
                     >
                       {inventory.status}
                     </button>
+<<<<<<< HEAD
                     <span className="warehouse__label">QTY</span>
+=======
+                    <span className="warehouse__label-mobile">QTY</span>
+>>>>>>> main
                     <span className="warehouse__label-item warehouse__label-item--width2">
                       {inventory.quantity}
                     </span>
@@ -267,7 +348,10 @@ function WarehouseDetails() {
         </ul>
       </>
     );
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
   }
 }
 

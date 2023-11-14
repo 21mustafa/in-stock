@@ -1,86 +1,100 @@
+@use "../../styles/partials/variables" as *;
+
 $tablet-width: 768px;
 $desktop-width: 1280px;
 @mixin tablet {
-    @media screen and (min-width: $tablet-width) {
-        @content;
-    }
+  @media screen and (min-width: $tablet-width) {
+    @content;
+  }
 }
 
 @mixin desktop {
-    @media screen and (min-width: $desktop-width) {
-        @content;
-    }
+  @media screen and (min-width: $desktop-width) {
+    @content;
+  }
 }
 
 @mixin h1 {
-    font-size: 2.8rem;
-    line-height: 3.6rem;
-    font-weight: 600;
+  font-size: 2.8rem;
+  line-height: 3.6rem;
+  font-weight: 600;
 
-    @include tablet {
-        font-size: 3.6rem;
-        line-height: 4rem;
-    }
+  @include tablet {
+    font-size: 3.6rem;
+    line-height: 4rem;
+  }
 }
 
 @mixin h2 {
-    font-size: 2rem;
-    line-height: 2.8rem;
-    font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  font-weight: 600;
 
-    @include tablet {
-        font-size: 2.4rem;
-        line-height: 3.2rem;
-    }
+  @include tablet {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+  }
 }
 
 @mixin h3 {
-    font-size: 1.3rem;
-    line-height: 2rem;
-    font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  font-weight: 600;
 
-    @include tablet {
-        font-size: 1.4rem;
-        line-height: 2.2rem;
-    }
+  @include tablet {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+  }
 }
 
 @mixin h4 {
-    font-size: 1.1rem;
-    line-height: 1.6rem;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
 
-    @include tablet {
-        font-size: 1.2rem;
-        line-height: 1.8rem;
-    }
+  @include tablet {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
 }
 
 @mixin p1 {
-    font-size: 1.5rem;
-    line-height: 2.6rem;
+  font-size: 1.5rem;
+  line-height: 2.6rem;
 
-    @include tablet {
-        font-size: 1.6rem;
-        line-height: 2.8rem;
-    }
+  @include tablet {
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+  }
 }
 
 @mixin p2 {
-    font-size: 1.3rem;
-    line-height: 2rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
 
-    @include tablet {
-        font-size: 1.4rem;
-        line-height: 2.2rem;
-    }
+  @include tablet {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+  }
 }
 
 @mixin p3 {
-    font-size: 1.1rem;
-    line-height: 1.6rem;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
 
-    @include tablet {
-        font-size: 1.2rem;
-        line-height: 1.8rem;
-    }
+  @include tablet {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
+}
+
+@mixin list-item-value {
+  @include p2;
+  color: $primary-colors-1;
+  font-weight: 300;
+}
+
+@mixin form-field {
+  &--error {
+    outline: 1px solid red;
+  }
 }

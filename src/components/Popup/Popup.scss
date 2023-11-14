@@ -1,13 +1,24 @@
 @use "../../styles/partials/mixin" as *;
 @use "../../styles/partials/variables" as *;
 
+@mixin popup-button {
+    width: 50%;
+    border-radius: 20px;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    @include tablet {
+        width: unset;
+        padding: 1.25rem 2rem;
+    }
+}
+
 .popup {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #00000091;
+    background-color: #232940bf;
     z-index: 999999;
 
     &__content {
@@ -15,12 +26,76 @@
         background-color: white;
         height: 100vh;
         width: 100vw;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
         @include tablet {
             left: 50%;
-            top: 50%;
+            top: 30%;
             transform: translate(-50%, -50%);
             height: unset;
-            width: unset;
+            width: 90%;
+            display: block;
+        }
+
+        @include desktop {
+            width: 60%;
+        }
+    }
+    &__close {
+        background: transparent;
+        cursor: pointer;
+
+        @include tablet {
+            float: right;
+        }
+    }
+
+    &__title {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        @include h1;
+    }
+
+    &__text {
+        @include p1;
+        margin-bottom: 2rem;
+        font-weight: 300;
+    }
+
+    &__action {
+        gap: 2rem;
+        display: flex;
+        width: 100%;
+
+        @include tablet {
+            justify-content: flex-end;
+        }
+
+        &-button--default {
+            @include popup-button;
+            background-color: $primary-colors-3;
+            border: 1px solid $secondary-colors-2;
+            color: $secondary-colors-1;
+        }
+        &-button--cautious {
+            @include popup-button;
+            background-color: $supporting-colors-2;
+            border: 1px solid $supporting-colors-2;
+            color: $primary-colors-3;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+
+        @include tablet {
+            padding: 2rem;
         }
     }
 }

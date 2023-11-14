@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "./InventoryEdit.scss";
+import "./InventoryAdd.scss";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import requiredError from "../../components/FormfieldError/Error";
 
 //images
 import back from "../../assets/icons/arrow_back-24px.svg";
+import add from "../../assets/icons/add_white_24dp.svg";
 
-function InventoryEdit(props) {
-  const params = useParams();
-  // console.log(params.id);
+function InventoryAdd() {
+  // const params = useParams();
+  // console.log(params);
 
   const [selectedInventory, setSelectedInventory] = useState({
     warehouse_id: "",
@@ -43,22 +44,9 @@ function InventoryEdit(props) {
       const response = await axios.get(`http://localhost:8080/warehouses`);
 
       setWarehouseList(response.data);
-      // console.log(response.data);
-      // console.log(warehouseList);
     };
     getWarehouseList();
   }, []);
-
-  useEffect(() => {
-    const getSelectedInventory = async () => {
-      const response = await axios.get(
-        `http://localhost:8080/inventories/${params.id}`
-      );
-      setSelectedInventory(response.data);
-      // console.log(response.data);
-    };
-    getSelectedInventory();
-  }, [params.id]);
 
   //
   const handleStatusChange = (e) => {
@@ -66,7 +54,6 @@ function InventoryEdit(props) {
       ...selectedInventory,
       status: e.target.value,
     });
-    // console.log(e.target.value);
   };
   const handleWarehouseChange = (e) => {
     setSelectedInventory({
@@ -75,6 +62,7 @@ function InventoryEdit(props) {
     });
   };
   //
+
   const handleInputChange = (field, value) => {
     setError((prevError) => ({
       ...prevError,
@@ -101,7 +89,7 @@ function InventoryEdit(props) {
       };
       setError(fieldErrors);
 
-      await axios.put(`http://localhost:8080/inventories/${params.id}`, {
+      await axios.post(`http://localhost:8080/inventories`, {
         warehouse_id: selectedInventory.warehouse_id,
         item_name: selectedInventory.item_name,
         description: selectedInventory.description,
@@ -111,54 +99,54 @@ function InventoryEdit(props) {
       });
       navigate("/inventory/list");
     } catch (err) {
-      console.log("form not submitted", err);
+      console.log("error: ", err);
       alert("Please fill out all the information");
     }
   };
 
   return (
-    <div className="inventoryEdit">
-      <div className="inventoryEdit-header">
+    <div className="inventoryAdd">
+      <div className="inventoryAdd-header">
         <Link to="/inventory/list">
-          <label htmlFor="back-button" className="inventoryEdit-header__label">
+          <label htmlFor="back-button" className="inventoryAdd-header__label">
             <img src={back} alt="back icon" />
           </label>
         </Link>
-        <h1 className="inventoryEdit__h1">Edit Inventory Item</h1>
+        <h1 className="inventoryAdd__h1">Add New Inventory Item</h1>
       </div>
 
-      <form className="inventoryEditForm" onSubmit={handleFormSubmit}>
-        <div className="inventoryEditForm-sections">
-          <section className="inventoryEditForm-section1">
-            <h2 className="inventoryEdit__h2">Item Details</h2>
+      <form className="inventoryAddForm" onSubmit={handleFormSubmit}>
+        <div className="inventoryAddForm-sections">
+          <section className="inventoryAddForm-section1">
+            <h2 className="inventoryAdd__h2">Item Details</h2>
 
-            <div className="inventoryEditForm__name">
-              <label className="inventoryEdit__h3">Item Name</label>
+            <div className="inventoryAddForm__name">
+              <label className="inventoryAdd__h3">Item Name</label>
               <input
                 className={
-                  error.item_name
-                    ? "editInput-name input--error"
-                    : "editInput-name"
+                  error.item_name ? "input-name input--error" : "input-name"
                 }
                 type="text"
                 name="item-name"
+                placeholder="Item Name"
                 value={selectedInventory.item_name}
                 onChange={(e) => handleInputChange("item_name", e.target.value)}
               />
               {error.item_name && requiredError()}
             </div>
 
-            <div className="inventoryEditForm__description">
-              <label className="inventoryEdit__h3">Description</label>
+            <div className="inventoryAddForm__description">
+              <label className="inventoryAdd__h3">Description</label>
               <textarea
                 className={
                   error.description
-                    ? "editInput-description input--error"
-                    : "editInput-description"
+                    ? "input-description input--error"
+                    : "input-description"
                 }
                 name="item-description"
                 cols="30"
                 rows="10"
+                placeholder="Please enter a brief item description..."
                 value={selectedInventory.description}
                 onChange={(e) =>
                   handleInputChange("description", e.target.value)
@@ -167,11 +155,10 @@ function InventoryEdit(props) {
               {error.description && requiredError()}
             </div>
 
-            <div className="inventoryEditForm__category">
-              <label className="inventoryEdit__h3">Category</label>
-
+            <div className="inventoryAddForm__category">
+              <label className="inventoryAdd__h3">Category</label>
               <select
-                className="editInput__category"
+                className="input__category"
                 value={selectedInventory.category}
                 onChange={(e) =>
                   setSelectedInventory({
@@ -181,7 +168,11 @@ function InventoryEdit(props) {
                 }
               >
                 {categories.map((category, index) => (
-                  <option key={index} value={category}>
+                  <option
+                    key={index}
+                    value={category}
+                    placeholder="Please select"
+                  >
                     {category}
                   </option>
                 ))}
@@ -189,16 +180,16 @@ function InventoryEdit(props) {
             </div>
           </section>
 
-          <section className="inventoryEditForm-section2">
+          <section className="inventoryAddForm-section2">
             <h2 className="inventoryEdit__h2">Item Availability</h2>
 
-            <div className="inventoryEditForm__status">
+            <div className="inventoryAddForm__status">
               <h3 className="inventoryEdit__h3">Status</h3>
 
-              <div className="inventoryEditForm__radio">
-                <section className="inventoryEditForm__radio-input">
+              <div className="inventoryAddForm__radio">
+                <section className="inventoryAddForm__radio-input">
                   <input
-                    className="editInput__status"
+                    className="input__status"
                     type="radio"
                     name="stockStatus"
                     id="in-stock"
@@ -206,14 +197,14 @@ function InventoryEdit(props) {
                     checked={selectedInventory.status === "In Stock"}
                     onChange={handleStatusChange}
                   />
-                  <label className="editInput__status-label" htmlFor="in-stock">
+                  <label className="input__status-label" htmlFor="in-stock">
                     In Stock
                   </label>
                 </section>
 
-                <section className="inventoryEditForm__radio-input">
+                <section className="inventoryAddForm__radio-input">
                   <input
-                    className="editInput__status"
+                    className="input__status"
                     type="radio"
                     name="stockStatus"
                     id="out-of-stock"
@@ -221,37 +212,34 @@ function InventoryEdit(props) {
                     checked={selectedInventory.status === "Out of Stock"}
                     onChange={handleStatusChange}
                   />
-                  <label
-                    className="editInput__status-label"
-                    htmlFor="out-of-stock"
-                  >
+                  <label className="input__status-label" htmlFor="out-of-stock">
                     Out of Stock
                   </label>
                 </section>
               </div>
             </div>
 
-            <div className="inventoryEditForm__quantity">
-              <label className="inventoryEdit__h3">Quantity</label>
+            <div className="inventoryAddForm__quantity">
+              <label className="inventoryAdd__h3">Quantity</label>
               <input
                 className={
                   error.quantity
-                    ? "editInput-quantity input--error"
-                    : "editInput-quantity"
+                    ? "input-quantity input--error"
+                    : "input-quantity"
                 }
                 type="text"
                 name="item-quantity"
+                placeholder="0"
                 value={selectedInventory.quantity}
                 onChange={(e) => handleInputChange("quantity", e.target.value)}
               />
               {error.quantity && requiredError()}
             </div>
 
-            <div className="inventoryEditForm__warehouse">
-              <label className="inventoryEdit__h3">Warehouse</label>
-
+            <div className="inventoryAddForm__warehouse">
+              <label className="inventoryAdd__h3">Warehouse</label>
               <select
-                className="editInput__warehouse"
+                className="input__warehouse"
                 onChange={handleWarehouseChange}
                 value={selectedInventory.warehouse_id}
               >
@@ -267,23 +255,32 @@ function InventoryEdit(props) {
           </section>
         </div>
 
-        <div className="inventoryEditForm__buttons">
-          <Link to="/inventory/list" className="inventoryEditButton">
+        <div className="inventoryAddForm__buttons">
+          <Link to="/inventory/list" className="inventoryAddButton">
             <input
-              className="inventoryEditButton inventoryEditButton__cancel"
+              className="inventoryAddButton inventoryAddButton__cancel"
               type="button"
               value="Cancel"
             ></input>
           </Link>
-          <input
-            type="submit"
-            className="inventoryEditButton inventoryEditButton__save"
-            value="Save"
-          ></input>
+
+          <div className="inventoryAddButton inventoryAddButton-btn">
+            <label htmlFor="add" className="inventoryAddButton__add-label">
+              <img
+                src={add}
+                alt="add icon"
+                className="inventoryAddButton__add-label-icon"
+              />
+            </label>
+            <input
+              type="submit"
+              className="inventoryAddButton inventoryAddButton__add"
+              value="Add Item"
+            ></input>
+          </div>
         </div>
       </form>
     </div>
   );
 }
-
-export default InventoryEdit;
+export default InventoryAdd;
