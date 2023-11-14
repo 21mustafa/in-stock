@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
-import requiredError from '../../components/FormfieldError/Error';
-import back from '../../assets/icons/arrow_back-24px.svg';
-import './WarehouseEdit.scss';
+import requiredError from "../../components/FormfieldError/Error";
+import back from "../../assets/icons/arrow_back-24px.svg";
+import "./WarehouseEdit.scss";
 
-const validator = require('validator');
+const validator = require("validator");
 
 function isValidPhoneNumber(phoneNumber) {
   const formats = [
@@ -17,7 +17,7 @@ function isValidPhoneNumber(phoneNumber) {
   return formats.some((format) => format.test(phoneNumber));
 }
 
-function WarehouseEdit() {
+function WarehouseEdit(props) {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -33,31 +33,31 @@ function WarehouseEdit() {
   });
 
   const [_formData, setFormData] = useState({
-    warehouse_name: '',
-    address: '',
-    city: '',
-    country: '',
-    contact_name: '',
-    contact_position: '',
-    contact_phone: '',
-    contact_email: '',
+    warehouse_name: "",
+    address: "",
+    city: "",
+    country: "",
+    contact_name: "",
+    contact_position: "",
+    contact_phone: "",
+    contact_email: "",
   });
 
   const [selectedWarehouse, setSelectedWarehouse] = useState({
-    warehouse_name: '',
-    address: '',
-    city: '',
-    country: '',
-    contact_name: '',
-    contact_position: '',
-    contact_phone: '',
-    contact_email: '',
+    warehouse_name: "",
+    address: "",
+    city: "",
+    country: "",
+    contact_name: "",
+    contact_position: "",
+    contact_phone: "",
+    contact_email: "",
   });
 
   const handleInputChange = (field, value) => {
     setError((prevError) => ({
       ...prevError,
-      [field]: value === '',
+      [field]: value === "",
     }));
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -79,7 +79,7 @@ function WarehouseEdit() {
       };
       getSelectedWarehouse();
     } catch (err) {
-      console.log('Error fetching warehouse data:', err);
+      console.log("Error fetching warehouse data:", err);
     }
   }, [params.id]);
 
@@ -106,13 +106,13 @@ function WarehouseEdit() {
 
       if (!isValidPhoneNumber(selectedWarehouse.contact_phone)) {
         alert(
-          'Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)'
+          "Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)"
         );
       }
 
       if (!validator.isEmail(selectedWarehouse.contact_email)) {
         alert(
-          'Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)'
+          "Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)"
         );
         return;
       }
@@ -127,8 +127,9 @@ function WarehouseEdit() {
         contact_phone: selectedWarehouse.contact_phone,
         contact_email: selectedWarehouse.contact_email,
       });
-      alert('Successfully Edited Warehouse!');
-      navigate('/');
+      alert("Successfully Edited Warehouse!");
+      await props.refreshWarehouseList();
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -150,13 +151,13 @@ function WarehouseEdit() {
             <input
               className={
                 error.warehouse_name
-                  ? 'warehouseedit__input warehouseedit__name warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__name '
+                  ? "warehouseedit__input warehouseedit__name warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__name "
               }
               type="text"
               value={selectedWarehouse.warehouse_name}
               onChange={(e) =>
-                handleInputChange('warehouse_name', e.target.value)
+                handleInputChange("warehouse_name", e.target.value)
               }
             />
             {error.warehouse_name && requiredError()}
@@ -164,36 +165,36 @@ function WarehouseEdit() {
             <input
               className={
                 error.address
-                  ? 'warehouseedit__input warehouseedit__address warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__address '
+                  ? "warehouseedit__input warehouseedit__address warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__address "
               }
               type="text"
               value={selectedWarehouse.address}
-              onChange={(e) => handleInputChange('address', e.target.value)}
+              onChange={(e) => handleInputChange("address", e.target.value)}
             />
             {error.address && requiredError()}
             City
             <input
               className={
                 error.city
-                  ? 'warehouseedit__input warehouseedit__cityedit warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__cityedit '
+                  ? "warehouseedit__input warehouseedit__cityedit warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__cityedit "
               }
               type="text"
               value={selectedWarehouse.city}
-              onChange={(e) => handleInputChange('city', e.target.value)}
+              onChange={(e) => handleInputChange("city", e.target.value)}
             />
             {error.city && requiredError()}
             Country
             <input
               className={
                 error.country
-                  ? 'warehouseedit__input warehouseedit__country warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__country '
+                  ? "warehouseedit__input warehouseedit__country warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__country "
               }
               type="text"
               value={selectedWarehouse.country}
-              onChange={(e) => handleInputChange('country', e.target.value)}
+              onChange={(e) => handleInputChange("country", e.target.value)}
             />
             {error.country && requiredError()}
           </div>
@@ -203,13 +204,13 @@ function WarehouseEdit() {
             <input
               className={
                 error.contact_name
-                  ? 'warehouseedit__input warehouseedit__name warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__name '
+                  ? "warehouseedit__input warehouseedit__name warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__name "
               }
               type="text"
               value={selectedWarehouse.contact_name}
               onChange={(e) =>
-                handleInputChange('contact_name', e.target.value)
+                handleInputChange("contact_name", e.target.value)
               }
             />
             {error.contact_name && requiredError()}
@@ -217,13 +218,13 @@ function WarehouseEdit() {
             <input
               className={
                 error.contact_position
-                  ? 'warehouseedit__input warehouseedit__position warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__position '
+                  ? "warehouseedit__input warehouseedit__position warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__position "
               }
               type="text"
               value={selectedWarehouse.contact_position}
               onChange={(e) =>
-                handleInputChange('contact_position', e.target.value)
+                handleInputChange("contact_position", e.target.value)
               }
             />
             {error.contact_position && requiredError()}
@@ -231,13 +232,13 @@ function WarehouseEdit() {
             <input
               className={
                 error.contact_phone
-                  ? 'warehouseedit__input warehouseedit__phone warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__phone '
+                  ? "warehouseedit__input warehouseedit__phone warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__phone "
               }
               type="text"
               value={selectedWarehouse.contact_phone}
               onChange={(e) =>
-                handleInputChange('contact_phone', e.target.value)
+                handleInputChange("contact_phone", e.target.value)
               }
             />
             {error.contact_phone && requiredError()}
@@ -245,13 +246,13 @@ function WarehouseEdit() {
             <input
               className={
                 error.contact_email
-                  ? 'warehouseedit__input warehouseedit__email warehouseedit__input--error'
-                  : 'warehouseedit__input warehouseedit__email '
+                  ? "warehouseedit__input warehouseedit__email warehouseedit__input--error"
+                  : "warehouseedit__input warehouseedit__email "
               }
               type="text"
               value={selectedWarehouse.contact_email}
               onChange={(e) =>
-                handleInputChange('contact_email', e.target.value)
+                handleInputChange("contact_email", e.target.value)
               }
             />
             {error.contact_email && requiredError()}
@@ -261,7 +262,7 @@ function WarehouseEdit() {
         <div className="warehouseedit__button-container">
           <Link
             className="warehouseedit__button warehouseedit__button-cancel"
-            to={'/'}
+            to={"/"}
           >
             Cancel
             <button type="button"></button>

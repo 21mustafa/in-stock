@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
-import requiredError from '../../components/FormfieldError/Error';
-import back from '../../assets/icons/arrow_back-24px.svg';
-import './WarehouseAdd.scss';
+import requiredError from "../../components/FormfieldError/Error";
+import back from "../../assets/icons/arrow_back-24px.svg";
+import "./WarehouseAdd.scss";
 
-const validator = require('validator');
+const validator = require("validator");
 
 function isValidPhoneNumber(phoneNumber) {
   const formats = [
@@ -17,7 +17,7 @@ function isValidPhoneNumber(phoneNumber) {
   return formats.some((format) => format.test(phoneNumber));
 }
 
-function WarehouseAdd() {
+function WarehouseAdd(props) {
   const navigate = useNavigate();
 
   const [error, setError] = useState({
@@ -32,20 +32,20 @@ function WarehouseAdd() {
   });
 
   const [formData, setFormData] = useState({
-    warehouse_name: '',
-    address: '',
-    city: '',
-    country: '',
-    contact_name: '',
-    contact_position: '',
-    contact_phone: '',
-    contact_email: '',
+    warehouse_name: "",
+    address: "",
+    city: "",
+    country: "",
+    contact_name: "",
+    contact_position: "",
+    contact_phone: "",
+    contact_email: "",
   });
 
   const handleInputChange = (field, value) => {
     setError((prevError) => ({
       ...prevError,
-      [field]: value === '',
+      [field]: value === "",
     }));
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -76,22 +76,23 @@ function WarehouseAdd() {
 
       if (!isValidPhoneNumber(formData.contact_phone)) {
         alert(
-          'Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)'
+          "Invalid phone number.\nPlease enter a valid phone number.\n(e.g., +1 (646) 123-1234)"
         );
       }
 
       if (!validator.isEmail(formData.contact_email)) {
         alert(
-          'Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)'
+          "Invalid Email format.\nPlease enter a valid email address. \n(e.g., example@example.com)"
         );
         return;
       }
 
       await axios.post(`http://localhost:8080/warehouses`, formData);
-      alert('Successfully Added Warehouse!');
-      navigate('/');
+      alert("Successfully Added Warehouse!");
+      await props.refreshWarehouseList();
+      navigate("/");
     } catch (err) {
-      console.log('Failed to add warehouse', err);
+      console.log("Failed to add warehouse", err);
     }
   };
 
@@ -111,14 +112,14 @@ function WarehouseAdd() {
             <input
               className={
                 error.warehouse_name
-                  ? 'warehouseadd__input warehouseadd__name warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__name '
+                  ? "warehouseadd__input warehouseadd__name warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__name "
               }
               type="text"
               placeholder="Warehouse Name"
               value={formData.warehouse_name}
               onChange={(e) =>
-                handleInputChange('warehouse_name', e.target.value)
+                handleInputChange("warehouse_name", e.target.value)
               }
             />
             {error.warehouse_name && requiredError()}
@@ -126,39 +127,39 @@ function WarehouseAdd() {
             <input
               className={
                 error.address
-                  ? 'warehouseadd__input warehouseadd__street warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__street '
+                  ? "warehouseadd__input warehouseadd__street warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__street "
               }
               type="text"
               placeholder="Street Address"
               value={formData.address}
-              onChange={(e) => handleInputChange('address', e.target.value)}
+              onChange={(e) => handleInputChange("address", e.target.value)}
             />
             {error.address && requiredError()}
             City
             <input
               className={
                 error.city
-                  ? 'warehouseadd__input warehouseadd__cityedit warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__cityedit '
+                  ? "warehouseadd__input warehouseadd__cityedit warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__cityedit "
               }
               type="text"
               placeholder="City"
               value={formData.city}
-              onChange={(e) => handleInputChange('city', e.target.value)}
+              onChange={(e) => handleInputChange("city", e.target.value)}
             />
             {error.city && requiredError()}
             Country
             <input
               className={
                 error.country
-                  ? 'warehouseadd__input warehouseadd__country warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__country '
+                  ? "warehouseadd__input warehouseadd__country warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__country "
               }
               type="text"
               placeholder="Country"
               value={formData.country}
-              onChange={(e) => handleInputChange('country', e.target.value)}
+              onChange={(e) => handleInputChange("country", e.target.value)}
             />
             {error.country && requiredError()}
           </div>
@@ -168,14 +169,14 @@ function WarehouseAdd() {
             <input
               className={
                 error.contact_name
-                  ? 'warehouseadd__input warehouseadd__name warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__name '
+                  ? "warehouseadd__input warehouseadd__name warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__name "
               }
               type="text"
               placeholder="Contact Name"
               value={formData.contact_name}
               onChange={(e) =>
-                handleInputChange('contact_name', e.target.value)
+                handleInputChange("contact_name", e.target.value)
               }
             />
             {error.contact_name && requiredError()}
@@ -183,14 +184,14 @@ function WarehouseAdd() {
             <input
               className={
                 error.contact_position
-                  ? 'warehouseadd__input warehouseadd__position warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__position '
+                  ? "warehouseadd__input warehouseadd__position warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__position "
               }
               type="text"
               placeholder="Position"
               value={formData.contact_position}
               onChange={(e) =>
-                handleInputChange('contact_position', e.target.value)
+                handleInputChange("contact_position", e.target.value)
               }
             />
             {error.contact_position && requiredError()}
@@ -198,14 +199,14 @@ function WarehouseAdd() {
             <input
               className={
                 error.contact_phone
-                  ? 'warehouseadd__input warehouseadd__phone warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__phone '
+                  ? "warehouseadd__input warehouseadd__phone warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__phone "
               }
               type="text"
               placeholder="Phone Number"
               value={formData.contact_phone}
               onChange={(e) =>
-                handleInputChange('contact_phone', e.target.value)
+                handleInputChange("contact_phone", e.target.value)
               }
             />
             {error.contact_phone && requiredError()}
@@ -213,21 +214,21 @@ function WarehouseAdd() {
             <input
               className={
                 error.contact_email
-                  ? 'warehouseadd__input warehouseadd__email warehouseadd__input--error'
-                  : 'warehouseadd__input warehouseadd__email '
+                  ? "warehouseadd__input warehouseadd__email warehouseadd__input--error"
+                  : "warehouseadd__input warehouseadd__email "
               }
               type="text"
               placeholder="Email"
               value={formData.contact_email}
               onChange={(e) =>
-                handleInputChange('contact_email', e.target.value)
+                handleInputChange("contact_email", e.target.value)
               }
             />
             {error.contact_email && requiredError()}
           </div>
         </div>
         <div className="warehouseadd__button-container">
-          <Link to={'/'}>
+          <Link to={"/"}>
             <button
               className="warehouseadd__button warehouseadd__button-cancel"
               type="button"

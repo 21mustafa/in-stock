@@ -77,8 +77,18 @@ function App() {
                   <WarehouseDetails refreshInventory={refreshInventory} />
                 }
               />
-              <Route path="/edit/:id" element={<WarehouseEdit />} />
-              <Route path="/add" element={<WarehouseAdd />} />
+              <Route
+                path="/edit/:id"
+                element={
+                  <WarehouseEdit refreshWarehouseList={refreshWarehouseList} />
+                }
+              />
+              <Route
+                path="/add"
+                element={
+                  <WarehouseAdd refreshWarehouseList={refreshWarehouseList} />
+                }
+              />
               <Route
                 path="/inventory/list"
                 element={
@@ -100,9 +110,18 @@ function App() {
               />
               <Route
                 path="/inventory/edit/:id"
-                element={<InventoryEdit inventoryList={inventoryList} />}
+                element={
+                  <InventoryEdit
+                    inventoryList={inventoryList}
+                    refreshInventory={refreshInventory}
+                  />
+                }
               />
-              <Route path="/inventory/add" element={<InventoryAdd />} />
+              <Route
+                path="/inventory/add"
+                element={<InventoryAdd />}
+                refreshInventory={refreshInventory}
+              />
             </Routes>
           </main>
           <Footer />

@@ -8,10 +8,7 @@ import requiredError from "../../components/FormfieldError/Error";
 import back from "../../assets/icons/arrow_back-24px.svg";
 import add from "../../assets/icons/add_white_24dp.svg";
 
-function InventoryAdd() {
-  // const params = useParams();
-  // console.log(params);
-
+function InventoryAdd(props) {
   const [selectedInventory, setSelectedInventory] = useState({
     warehouse_id: "",
     item_name: "",
@@ -97,6 +94,7 @@ function InventoryAdd() {
         status: selectedInventory.status,
         quantity: selectedInventory.quantity,
       });
+      await props.refreshInventory();
       navigate("/inventory/list");
     } catch (err) {
       console.log("error: ", err);

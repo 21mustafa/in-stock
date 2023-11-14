@@ -9,7 +9,6 @@ import back from "../../assets/icons/arrow_back-24px.svg";
 
 function InventoryEdit(props) {
   const params = useParams();
-  // console.log(params.id);
 
   const [selectedInventory, setSelectedInventory] = useState({
     warehouse_id: "",
@@ -43,8 +42,6 @@ function InventoryEdit(props) {
       const response = await axios.get(`http://localhost:8080/warehouses`);
 
       setWarehouseList(response.data);
-      // console.log(response.data);
-      // console.log(warehouseList);
     };
     getWarehouseList();
   }, []);
@@ -55,18 +52,15 @@ function InventoryEdit(props) {
         `http://localhost:8080/inventories/${params.id}`
       );
       setSelectedInventory(response.data);
-      // console.log(response.data);
     };
     getSelectedInventory();
   }, [params.id]);
 
-  //
   const handleStatusChange = (e) => {
     setSelectedInventory({
       ...selectedInventory,
       status: e.target.value,
     });
-    // console.log(e.target.value);
   };
   const handleWarehouseChange = (e) => {
     setSelectedInventory({
@@ -89,7 +83,6 @@ function InventoryEdit(props) {
   const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // console.log(selectedInventory.warehouse_id);
     try {
       const fieldErrors = {
         warehouse_id: !selectedInventory.warehouse_id,
@@ -109,6 +102,7 @@ function InventoryEdit(props) {
         status: selectedInventory.status,
         quantity: selectedInventory.quantity,
       });
+      await props.refreshInventory();
       navigate("/inventory/list");
     } catch (err) {
       console.log("form not submitted", err);
