@@ -18,19 +18,6 @@ function App() {
   const [warehouseList, setWarehouseList] = useState([]);
   const [inventoryList, setInventoryList] = useState([]);
 
-  function selectWarehouse(id) {
-    const selectedWarehouse = warehouseDetails.find(
-      (warehouse) => warehouse.id === id
-    );
-
-    setWarehouseList(selectedWarehouse);
-  }
-
-  useEffect(() => {
-    void getInventoryList();
-    void getWarehouseList();
-  }, []);
-
   const getInventoryList = async () => {
     const response = await axios.get("http://localhost:8080/inventories");
     setInventoryList(response.data);
@@ -40,6 +27,18 @@ function App() {
     const response = await axios.get("http://localhost:8080/warehouses");
     setWarehouseList(response.data);
   };
+
+  useEffect(() => {
+    void getInventoryList();
+    void getWarehouseList();
+  }, []);
+
+  function selectWarehouse(id) {
+    const selectedWarehouse = warehouseList.find(
+      (warehouse) => warehouse.id === id
+    );
+    setWarehouseList(selectedWarehouse);
+  }
 
   const refreshInventory = async () => {
     await getInventoryList();
@@ -72,7 +71,11 @@ function App() {
                   />
                 }
               />
-              <Route path="/details/:id" element={<WarehouseDetails />} />
+              <Route
+                path="/details/:id"
+                element={<WarehouseDetails />}
+                refreshInventory={refreshInventory}
+              />
               <Route path="/edit/:id" element={<WarehouseEdit />} />
               <Route path="/add" element={<WarehouseAdd />} />
               <Route
